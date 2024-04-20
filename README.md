@@ -47,3 +47,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 - [ ] Chat with user
 - [ ] Create code for discount products or variants
 - [ ] Seller dashboard: Sale performance data visualization
+
+## Entity Relationship Diagram
+
+![E-commerce diagram](../e-commerce.drawio.png)
