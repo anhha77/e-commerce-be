@@ -50,4 +50,4 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ## Entity Relationship Diagram
 
-![E-commerce diagram](../e-commerce.drawio.png)
+![E-commerce diagram](../ecommerce.drawio.png)
