@@ -51,3 +51,196 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 ## Entity Relationship Diagram
 
 ![E-commerce diagram](./ecommerce.drawio.png)
+
+## API Endpoints
+
+## Auth APIs
+
+```javascript
+/**
+ * @route POST /auth/login
+ * @description Log in with email and password
+ * @body {email, password}
+ * @access Public
+ */
+```
+
+```javascript
+/**
+ * @route POST /users
+ * @description User Registration
+ * @body {name, email, password}
+ * @access Public
+ */
+```
+
+### User APIs
+
+```javascript
+/**
+ * @route GET /users/me
+ * @description Get current user info
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route PUT /users/:id
+ * @description Update user profile
+ * @body {username, avatarUrl, password, birthOfDate, phoneNumber}
+ * @access Login required
+ */
+```
+
+### Cart APIs
+
+```javascript
+/**
+ * @route GET /cart/:cartItemId
+ * @decription Get detail of a specific product in cart
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route POST /cart
+ * @description Create a product in user cart
+ * @body {userId, productItemId, qty}
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route PUT /cart/:cartItemId
+ * @description Update a product in user cart
+ * @body {userId, qty}
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route DELETE /cart/:cartItemId/users/:id
+ * @description Delete a product in user
+ * @access Login required
+ */
+```
+
+### Address APIs
+
+```javascript
+/**
+ * @route GET /address/users/:id
+ * @description Get all address of a user
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route POST /address
+ * @description Create an address of a user
+ * @body {userId, addressLocation, country, phoneNumber, isDefault}
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route PUT /address/:adrressId
+ * @description Update an address of a user
+ * @body {addressLocation, country, phoneNumber. isDefault}
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route DELETE /address/:addressId
+ * @description Delete an address of a user
+ * @access Login required
+ */
+```
+
+### Review APIs
+
+```javascript
+/**
+ * @route GET reviews/products/:productItemId
+ * @description Get all the product reviews
+ * @access Public
+ */
+```
+
+```javascript
+/**
+ * @route GET reviews/users/:id
+ * @description Get all user reviews
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route POST /reviews
+ * @description Create a review for a product
+ * @body {userId, productVariationId, ratingValue, comment, imageUrl}
+ * @access Public
+ */
+```
+
+```javascript
+/**
+ * @route PUT /reviews/:reviewId
+ * @description Update a review of a product
+ * @body {ratingValue, comment, imageUrl}
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route DELETE /reviews/:reviewId
+ * @description Delete a review
+ * @access Login required
+ */
+```
+
+### Payment method APIs
+
+```javascript
+/**
+ * @route GET /payment/users/:id
+ * @description Get all payment method of user
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route POST /payment
+ * @description Create a new payment method
+ * @body {userId, paymentType, accountNumber, isDefault}
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route PUT /payment/:paymentId
+ * @description Update a payment method
+ * @body {accountNumber, isDefault}
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route DELETE /payment/:paymentId
+ * @description Delete a payment method
+ * @access Login required
+ */
+```
