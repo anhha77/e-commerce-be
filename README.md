@@ -185,7 +185,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET users/:id/reviews
+ * @route GET /reviews
  * @description Get all user reviews
  * @access Login required
  */
@@ -193,7 +193,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route POST users/reviews
+ * @route POST /reviews
  * @description Create a review for a product
  * @body {userId, productVariationId, ratingValue, comment, imageUrl}
  * @access Login required
@@ -202,7 +202,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route PUT users/:id/reviews/:reviewId
+ * @route PUT /reviews/:reviewId
  * @description Update a review of a product
  * @body {ratingValue, comment, imageUrl}
  * @access Login required
@@ -211,7 +211,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route DELETE users/:id/reviews/:reviewId
+ * @route DELETE /reviews/:reviewId
  * @description Delete a review
  * @access Login required
  */
@@ -228,14 +228,14 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  */
 ```
 
-```javascript
+<!-- ```javascript
 /**
  * @route GET users/payment
  * @description Get all payment method
  * @access Login required
  *
  */
-```
+``` -->
 
 ```javascript
 /**
@@ -275,23 +275,23 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET users/:id/orders
+ * @route GET /orders
  * @description Get all orders of a user
  * @access Login required
  */
 ```
 
-```javascript
+<!-- ```javascript
 /**
  * @route GET admin/orders/:orderId
  * @description Get specific detail of order list
  * @access Login required (Admin)
  */
-```
+``` -->
 
 ```javascript
 /**
- * @route GET users/orders/:orderId
+ * @route GET /orders/:orderId
  * @description Get specific detail of order list
  * @access Login required
  */
@@ -299,25 +299,25 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route POST users/orders
+ * @route POST /orders
  * @description Create an order
  * @body {userId, orderItem, orderDate, paymentMethod, account, shippingAddress, shippingMethod, orderStatus}
  * @access Login required
  */
 ```
 
-```javascript
+<!-- ```javascript
 /**
  * @route PUT admin/orders/:orderId
  * @description Update order status
  * @body {orderStatus}
  * @access Login required (Admin)
  */
-```
+``` -->
 
 ```javascript
 /**
- * @route PUT users/orders/:orderId
+ * @route PUT /orders/:orderId
  * @description Update order list
  * @body {orderItem, orderDate, paymentMethod, account, shippingAdress, shippingMethod, orderStatus}
  * @access Login required
@@ -328,19 +328,19 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET users/category
+ * @route GET /category
  * @description Get all the category of e-commerce shop
  * @access Login required
  */
 ```
 
-```javascript
+<!-- ```javascript
 /**
  * @route GET admin/category
  * @description Get all the category of e-commerce shop
  * @access Login required (Admin)
  */
-```
+``` -->
 
 ```javascript
 /**
@@ -394,14 +394,14 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET users/products
+ * @route GET /products
  * @description Get the products
  * @query {name, color, size, sortByPrice}
  * @access Login required
  */
 ```
 
-- Use Product_variation_master collection
+<!-- - Use Product_variation_master collection
 
 ```javascript
 /**
@@ -410,19 +410,19 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  * @query {name, color, size, sortByPrice}
  * @access Login required (Admin)
  */
-```
+``` -->
 
 - Use Product_variation_master collection
 
 ```javascript
 /**
- * @route GET users/products/:productId
+ * @route GET /products/:productId
  * @description Get the product detail
  * @access Login required
  */
 ```
 
-- Use Product_variation_master collection
+<!-- - Use Product_variation_master collection
 
 ```javascript
 /**
@@ -430,13 +430,13 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  * @description Get the product detail
  * @access Login required (Admin)
  */
-```
+``` -->
 
 - Use Product collection
 
 ```javascript
 /**
- * @route GET admin/product
+ * @route GET admin/products/productParents
  * @description Get the products parent
  * @query {name, color}
  * @access Login required (Admin)
@@ -445,8 +445,8 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET admin/productParents/:productParentId
- * @description Get the products parent detail
+ * @route GET admin/products/productParents/:productParentId
+ * @description Get the product parent detail
  * @access Login required (Admin)
  */
 ```
@@ -455,13 +455,13 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET users/products/silbling/:productId
+ * @route GET /products/silbling/:productId
  * @description Get the silbling of product variation master
  * @access Login required
  */
 ```
 
-- Use Product collection
+<!-- - Use Product collection
 
 ```javascript
 /**
@@ -469,7 +469,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  * @description Get the silbling of product variation master
  * @access Login required (Admin)
  */
-```
+``` -->
 
 - Use Product collection
 
