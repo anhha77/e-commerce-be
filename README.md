@@ -25,7 +25,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 - [ ] User can filter products on various parameters
 - [ ] User can sort products according to price and name
 - [ ] User can add products to cart
-- [ ] User can order products by providing their shipping information and card detail if the user pay with credit card
+- [ ] User can order products by providing their shipping information and only pay directly
 - [ ] User can view the feedback of a product
 - [ ] User can chat with the shop owner
 
@@ -88,16 +88,16 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 /**
  * @route PUT /users/:id
  * @description Update user profile
- * @body {username, avatarUrl, password, birthOfDate, phoneNumber}
+ * @body {username, avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
  * @access Login required
  */
 ```
 
-### Cart APIs
+<!-- ### Cart APIs
 
 ```javascript
 /**
- * @route GET /cart/:cartItemId
+ * @route GET /users/:id/cart/:productItemId
  * @decription Get detail of a specific product in cart
  * @access Login required
  */
@@ -105,35 +105,35 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route POST /cart
+ * @route POST /users/:id/cart
  * @description Create a product in user cart
- * @body {userId, productItemId, qty}
+ * @body {productItemId, qty}
  * @access Login required
  */
 ```
 
 ```javascript
 /**
- * @route PUT /cart/:cartItemId
+ * @route PUT /users/:id/cart/:cartItemId
  * @description Update a product in user cart
- * @body {userId, qty}
+ * @body {qty}
  * @access Login required
  */
 ```
 
 ```javascript
 /**
- * @route DELETE /cart/:cartItemId/users/:id
+ * @route DELETE /users/:id/cart/:cartItemId
  * @description Delete a product in user
  * @access Login required
  */
-```
+``` -->
 
-### Address APIs
+<!-- ### Address APIs
 
 ```javascript
 /**
- * @route GET /address/users/:id
+ * @route GET /users/:id/address
  * @description Get all address of a user
  * @access Login required
  */
@@ -141,7 +141,15 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route POST /address
+ * @route GET /users/:id/address/:addressId
+ * @description Get detail of an address
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route POST /users/address
  * @description Create an address of a user
  * @body {userId, addressLocation, country, phoneNumber, isDefault}
  * @access Login required
@@ -150,7 +158,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route PUT /address/:adrressId
+ * @route PUT users/:id/address/:adrressId
  * @description Update an address of a user
  * @body {addressLocation, country, phoneNumber. isDefault}
  * @access Login required
@@ -159,17 +167,17 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route DELETE /address/:addressId
+ * @route DELETE users/:id/address/:addressId
  * @description Delete an address of a user
  * @access Login required
  */
-```
+``` -->
 
 ### Review APIs
 
 ```javascript
 /**
- * @route GET reviews/products/:productItemId
+ * @route GET /reviews/products/:productItemId
  * @description Get all the product reviews
  * @access Public
  */
@@ -177,7 +185,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET reviews/users/:id
+ * @route GET users/:id/reviews
  * @description Get all user reviews
  * @access Login required
  */
@@ -185,16 +193,16 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route POST /reviews
+ * @route POST users/reviews
  * @description Create a review for a product
  * @body {userId, productVariationId, ratingValue, comment, imageUrl}
- * @access Public
+ * @access Login required
  */
 ```
 
 ```javascript
 /**
- * @route PUT /reviews/:reviewId
+ * @route PUT users/:id/reviews/:reviewId
  * @description Update a review of a product
  * @body {ratingValue, comment, imageUrl}
  * @access Login required
@@ -203,7 +211,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route DELETE /reviews/:reviewId
+ * @route DELETE users/:id/reviews/:reviewId
  * @description Delete a review
  * @access Login required
  */
@@ -213,34 +221,332 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET /payment/users/:id
- * @description Get all payment method of user
- * @access Login required
+ * @route GET admin/payment
+ * @description Get all payment method
+ * @access Login required (Admin)
+ *
  */
 ```
 
 ```javascript
 /**
- * @route POST /payment
+ * @route GET users/payment
+ * @description Get all payment method
+ * @access Login required
+ *
+ */
+```
+
+```javascript
+/**
+ * @route POST admin/payment
  * @description Create a new payment method
- * @body {userId, paymentType, accountNumber, isDefault}
- * @access Login required
+ * @body {account, paymentMethod}
+ * @access Login required (Admin)
  */
 ```
 
 ```javascript
 /**
- * @route PUT /payment/:paymentId
+ * @route PUT admin/payment/:paymentId
  * @description Update a payment method
- * @body {accountNumber, isDefault}
+ * @body {accountNumber, paymentMethod}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route DELETE admin/payment/:paymentId
+ * @description Delete a payment method
+ * @access Login required (Admin)
+ */
+```
+
+### Order APIs
+
+```javascript
+/**
+ * @route GET admin/orders
+ * @description Get all orders
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route GET users/:id/orders
+ * @description Get all orders of a user
  * @access Login required
  */
 ```
 
 ```javascript
 /**
- * @route DELETE /payment/:paymentId
- * @description Delete a payment method
+ * @route GET admin/orders/:orderId
+ * @description Get specific detail of order list
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route GET users/orders/:orderId
+ * @description Get specific detail of order list
  * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route POST users/orders
+ * @description Create an order
+ * @body {userId, orderItem, orderDate, paymentMethod, account, shippingAddress, shippingMethod, orderStatus}
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route PUT admin/orders/:orderId
+ * @description Update order status
+ * @body {orderStatus}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route PUT users/orders/:orderId
+ * @description Update order list
+ * @body {orderItem, orderDate, paymentMethod, account, shippingAdress, shippingMethod, orderStatus}
+ * @access Login required
+ */
+```
+
+### Product category APIs
+
+```javascript
+/**
+ * @route GET users/category
+ * @description Get all the category of e-commerce shop
+ * @access Login required
+ */
+```
+
+```javascript
+/**
+ * @route GET admin/category
+ * @description Get all the category of e-commerce shop
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route POST admin/category
+ * @description Create a category name
+ * @body {parentCategoryId, categoryName}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route PUT admin/category/:categoryId
+ * @description Update a category
+ * @body {parentCategoryId, categoryName}
+ * @access Login required (Admin)
+ */
+```
+
+### Variation APIs
+
+```javascript
+/**
+ * @route GET admin/variation
+ * @description Get all variation
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route POST admin/variation
+ * @description Create a variation
+ * @body {variationType, value}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route PUT admin/variation/:variationId
+ * @description Update a variation
+ * @body {value}
+ * @access Login required (Admin)
+ */
+```
+
+### Products APIs
+
+- Use Product_variation_master collection
+
+```javascript
+/**
+ * @route GET users/products
+ * @description Get the products
+ * @query {name, color, size, sortByPrice}
+ * @access Login required
+ */
+```
+
+- Use Product_variation_master collection
+
+```javascript
+/**
+ * @route GET admin/products
+ * @description Get the products
+ * @query {name, color, size, sortByPrice}
+ * @access Login required (Admin)
+ */
+```
+
+- Use Product_variation_master collection
+
+```javascript
+/**
+ * @route GET users/products/:productId
+ * @description Get the product detail
+ * @access Login required
+ */
+```
+
+- Use Product_variation_master collection
+
+```javascript
+/**
+ * @route GET admin/products/:productId
+ * @description Get the product detail
+ * @access Login required (Admin)
+ */
+```
+
+- Use Product collection
+
+```javascript
+/**
+ * @route GET admin/product
+ * @description Get the products parent
+ * @query {name, color}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route GET admin/productParents/:productParentId
+ * @description Get the products parent detail
+ * @access Login required (Admin)
+ */
+```
+
+- Use Product collection
+
+```javascript
+/**
+ * @route GET users/products/silbling/:productId
+ * @description Get the silbling of product variation master
+ * @access Login required
+ */
+```
+
+- Use Product collection
+
+```javascript
+/**
+ * @route GET admin/products/silbling/:productId
+ * @description Get the silbling of product variation master
+ * @access Login required (Admin)
+ */
+```
+
+- Use Product collection
+
+```javascript
+/**
+ * @route POST admin/products
+ * @description Create a product in e commerce website
+ * @body {name, description, categoryId}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route POST admin/products/:productId/variationMasterProduct
+ * @description Create a product variation master
+ * @body {name, productImage, ownerId, description, price, variationMasterId}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route POST admin/products/:productId/variationMasterProduct/:variationMasterProductId/variation
+ * @description Create a product variation
+ * @body {quantityInStore, description, variationObjectId}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route PUT admin/products/:productId
+ * @description Update a product
+ * @body {name, description}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route PUT admin/products/:productId/variationMaster/:variationMasterId
+ * @description Update a product variation master
+ * @body {name, description, productImage, price}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route PUT admin/products/:productId/variationMaster/:variationMasterId/variation/:variationId
+ * @description Update a product variation
+ * @body {quantityInStore, description, isActive}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route DELETE admin/products/:productId
+ * @description Delete a product
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route DELETE admin/products/:productId/variationMaster/:variationMasterId
+ * @description Delete a product variation master
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route DELETE admin/products/:productId/variationMaster/:variationMasterId/variation/:variationId
+ * @description Delete a product variation
+ * @access Login required (Admin)
  */
 ```
