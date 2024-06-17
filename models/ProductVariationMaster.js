@@ -20,6 +20,7 @@ const productVariationMasterSchema = Schema({
 
 const ProductVariationMaster = mongoose.model(
   "ProductVariationMaster",
-  productVariationMasterSchema
+  productVariationMasterSchema,
+  "VariationsMaster"
 );
 module.exports = ProductVariationMaster;

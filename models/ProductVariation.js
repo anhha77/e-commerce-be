@@ -18,6 +18,7 @@ const productVariationSchema = Schema(
 
 const ProductVariation = mongoose.model(
   "ProductVariation",
-  productVariationSchema
+  productVariationSchema,
+  "Variations"
 );
 module.exports = ProductVariation;

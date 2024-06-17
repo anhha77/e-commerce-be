@@ -8,6 +8,7 @@ const creditAdminAccountSchema = Schema({
 
 const CreditAdminAccount = mongoose.model(
   "CreditAdminAccount",
-  creditAdminAccountSchema
+  creditAdminAccountSchema,
+  "CreditAccount"
 );
 module.exports = CreditAdminAccount;

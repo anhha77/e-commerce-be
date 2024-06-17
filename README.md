@@ -59,8 +59,8 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 ```javascript
 /**
  * @route POST /auth/login
- * @description Log in with email and password
- * @body {email, password}
+ * @description Log in with username and password
+ * @body {username, password}
  * @access Public
  */
 ```
@@ -69,7 +69,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 /**
  * @route POST /users
  * @description User Registration
- * @body {name, email, password}
+ * @body {username, email, password}
  * @access Public
  */
 ```
@@ -88,7 +88,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 /**
  * @route PUT /users/:id
  * @description Update user profile
- * @body {username, avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
+ * @body {avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
  * @access Login required
  */
 ```

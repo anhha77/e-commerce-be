@@ -12,5 +12,5 @@ const userReviewSchema = Schema(
   { timestamps: true }
 );
 
-const UserReview = mongoose.model("UserReview", userReviewSchema);
+const UserReview = mongoose.model("UserReview", userReviewSchema, "Reviews");
 module.exports = UserReview;
