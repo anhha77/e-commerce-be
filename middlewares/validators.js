@@ -22,3 +22,5 @@ validators.checkObjectId = (paramId) => {
   }
   return true;
 };
+
+module.exports = validators;
