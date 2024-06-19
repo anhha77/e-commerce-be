@@ -1,4 +1,4 @@
-const { AppError, sendResponse, catchAsync } = require("../helpers/utils");
+const { AppError, sendResponse, catchAsync } = require("../../helpers/utils");
 
 const productController = {};
 

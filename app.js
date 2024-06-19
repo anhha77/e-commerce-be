@@ -17,8 +17,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
-app.use("/", indexRouter);
-
 const mongoose = require("mongoose");
 const mongoURI = process.env.MONGODB_URI;
 
@@ -26,6 +24,8 @@ mongoose
   .connect(mongoURI)
   .then(() => console.log(`DB connected ${mongoURI}`))
   .catch((err) => console.log(err));
+
+app.use("/", indexRouter);
 
 app.use((req, res, next) => {
   const err = new AppError(404, "Not Found", "Bad Request");

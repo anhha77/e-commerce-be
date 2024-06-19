@@ -15,12 +15,12 @@ const authentication = require("../middlewares/authentication");
 router.post(
   "/",
   validators.validate([
-    body("username", "Invalid username").exist().notEmpty(),
+    body("username", "Invalid username").exists().notEmpty(),
     body("email", "Invalid email")
-      .exist()
+      .exists()
       .isEmail()
       .normalizeEmail({ gmail_remove_dots: false }),
-    body("password", "Invalid password").exist().notEmpty(),
+    body("password", "Invalid password").exists().notEmpty(),
   ]),
   userController.register
 );
