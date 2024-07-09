@@ -25,13 +25,18 @@ const addressSchema = Schema({
 
 const userSchema = Schema(
   {
-    avatarUrl: { type: String, required: false },
+    avatarUrl: { type: String, required: false, default: "" },
     username: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    birthOfDate: { type: Date, required: false },
-    phoneNumber: { type: String, required: false },
-    role: { type: String, required: true, enum: [Roles.ADMIN, Roles.USER] },
+    birthOfDate: { type: Date, required: false, default: null },
+    phoneNumber: { type: String, required: false, default: "" },
+    role: {
+      type: String,
+      required: false,
+      enum: [Roles.ADMIN, Roles.USER],
+      default: Roles.USER,
+    },
     cartItem: [cartItemSchema],
     address: [addressSchema],
     isDeleted: { type: Boolean, default: false },
