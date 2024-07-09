@@ -22,6 +22,7 @@ authentication.loginRequired = (req, res, next) => {
 
       req.userId = payload._id;
     });
+    next();
   } catch (error) {
     next(error);
   }

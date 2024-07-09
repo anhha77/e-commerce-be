@@ -8,7 +8,7 @@ const adminApi = require("./admin/index");
 router.use("/admin", adminApi);
 
 const userApi = require("./user.api");
-router.use("/user", userApi);
+router.use("/users", userApi);
 
 const reviewApi = require("./review.api");
 router.use("/reviews", reviewApi);

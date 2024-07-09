@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const authController = {};
 
 authController.loginWithUsernameAndPass = catchAsync(async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   let user = await User.findOne({ email }, "+password");
   if (!user) throw new AppError(400, "Invalid Credentials", "Login Error");

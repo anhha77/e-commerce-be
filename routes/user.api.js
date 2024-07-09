@@ -25,4 +25,12 @@ router.post(
   userController.register
 );
 
+/**
+ * @route GET /users/me
+ * @description Get current user info
+ * @access Login required
+ */
+
+router.get("/me", authentication.loginRequired, userController.getCurrentUser);
+
 module.exports = router;
