@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const creditAdminAccountSchema = Schema({
-  account: { type: String, required: false },
+  account: { type: String, required: false, default: "" },
   paymentMeyhod: { type: String, required: true },
 });
 

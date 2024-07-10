@@ -42,19 +42,23 @@ const orderStatusSchema = Schema(
     setBy: { type: Schema.ObjectId, required: true, ref: "User" },
     dateSet: { type: Date, required: true },
   },
-  { timestampes: true }
+  { timestamps: true }
 );
 
 const orderSchema = Schema(
   {
-    userId: { type: Schema.ObjectId, required: true },
+    userId: { type: Schema.ObjectId, required: true, ref: "User" },
     orderItem: [orderItemSchema],
     orderDate: { type: Date, required: true },
     paymentMethod: { type: String, required: true, enum: ["paypal", "cash"] },
-    account: { type: String, required: false },
-    shippingAddress: { type: Schema.ObjectId, required: true, ref: "User" },
+    account: { type: String, required: false, default: "" },
+    shippingAddress: {
+      type: Schema.ObjectId,
+      required: true,
+      ref: "User.address",
+    },
     shippingMethod: shippingMethodSchema,
-    orderTotal: { type: String, required: true },
+    orderTotal: { type: Number, required: true },
     orderStatus: [orderStatusSchema],
   },
   { timestamps: true }

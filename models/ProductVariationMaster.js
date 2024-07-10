@@ -13,7 +13,7 @@ const productVariationMasterSchema = Schema({
   productVariationId: [
     { type: Schema.ObjectId, required: true, ref: "ProductVariation" },
   ],
-  description: { type: String, required: false },
+  description: { type: String, required: false, default: "" },
   price: { type: Number, required: true },
   productId: { type: Schema.ObjectId, required: true, ref: "Product" },
 });
@@ -21,6 +21,6 @@ const productVariationMasterSchema = Schema({
 const ProductVariationMaster = mongoose.model(
   "ProductVariationMaster",
   productVariationMasterSchema,
-  "VariationsMaster"
+  "ProductVariationsMaster"
 );
 module.exports = ProductVariationMaster;
