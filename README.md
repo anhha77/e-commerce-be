@@ -93,6 +93,22 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  */
 ```
 
+```javascript
+/**
+ * @route GET /users
+ * @description Get all users with filter
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route GET /users/:id
+ * @description Get detail of a user
+ * @access Login required (Admin)
+ */
+```
+
 <!-- ### Cart APIs
 
 ```javascript
