@@ -40,4 +40,59 @@ userController.getCurrentUser = catchAsync(async (req, res, next) => {
   sendResponse(res, 200, true, user, null, "Get Current User Successfully");
 });
 
+userController.getUsers = catchAsync(async (req, res, next) => {
+  let { page, limit, ...filter } = { ...req.query };
+
+  page = parseInt(page) || 1;
+  limit = parseInt(limit) || 5;
+
+  const filterConditions = [{ isDeleted: false }];
+  if (filter.username) {
+    filterConditions.push({
+      username: { $regex: filter.username, $options: "i" },
+    });
+  }
+
+  if (filter.email) {
+    filterConditions.push({
+      email: { $regex: filter.email, $options: "i" },
+    });
+  }
+
+  if (filter.phoneNumber) {
+    filterConditions.push({
+      phoneNumber: { $regex: filter.phoneNumber },
+    });
+  }
+
+  const filterCriteria = filterConditions.length
+    ? { $and: filterConditions }
+    : {};
+
+  const count = await User.countDocuments(filterCriteria);
+  const totalPages = Math.ceil(count / limit);
+  const offset = limit * (page - 1);
+
+  let users = await User.find(filterCriteria)
+    .sort({ createdAt: -1 })
+    .skip(offset)
+    .limit(limit);
+
+  const promises = users.map(async (user) => {
+    let temp = user.toJSON();
+    return temp;
+  });
+
+  users = await Promise.all(promises);
+
+  return sendResponse(
+    res,
+    200,
+    true,
+    { users, count, totalPages },
+    null,
+    "Get users successfully"
+  );
+});
+
 module.exports = userController;

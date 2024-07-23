@@ -21,7 +21,28 @@ authentication.loginRequired = (req, res, next) => {
       }
 
       req.userId = payload._id;
+      req.role = payload.role;
     });
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+authentication.validateRole = (req, res, next, rolesRequired) => {
+  try {
+    let isAccess = false;
+    const roleCurrentUser = req.role;
+    rolesRequired.forEach((role) => {
+      if (role === roleCurrentUser) {
+        isAccess = true;
+      }
+    });
+
+    if (!isAccess) {
+      throw new AppError(401, "Missing required role", "Validate role error");
+    }
+
     next();
   } catch (error) {
     next(error);
