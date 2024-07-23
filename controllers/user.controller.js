@@ -95,4 +95,15 @@ userController.getUsers = catchAsync(async (req, res, next) => {
   );
 });
 
+userController.getSingleUser = catchAsync(async (req, res, next) => {
+  const userId = req.params.id;
+
+  let user = await User.findById(userId);
+  if (!user) throw new AppError(400, "User not found", "Get user error");
+
+  user = user.toJSON();
+
+  return sendResponse(res, 200, true, user, null, "Get user successfully");
+});
+
 module.exports = userController;

@@ -56,6 +56,9 @@ router.get(
   "/:id",
   authentication.loginRequired,
   (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
+  validators.validate([
+    param("id").exists().isString().custom(validators.checkObjectId),
+  ]),
   userController.getSingleUser
 );
 
