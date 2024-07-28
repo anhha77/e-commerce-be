@@ -43,38 +43,41 @@ userController.getCurrentUser = catchAsync(async (req, res, next) => {
 userController.getUsers = catchAsync(async (req, res, next) => {
   let { page, limit, ...filter } = { ...req.query };
 
-  page = parseInt(page) || 1;
-  limit = parseInt(limit) || 5;
+  page = parseInt(page) || 0;
+  limit = parseInt(limit) || 20;
 
-  const filterConditions = [{ isDeleted: false }];
-  if (filter.username) {
-    filterConditions.push({
-      username: { $regex: filter.username, $options: "i" },
-    });
+  const sortDirection = parseInt(filter.sortDirection) || -1;
+  const orderBy = filter.orderBy || "username";
+  const sort = {};
+  sort[orderBy] = sortDirection;
+
+  let query = [];
+  if (filter.searchQuery) {
+    if (filter.usernameSearch === "true") {
+      query.push({ username: { $regex: filter.searchQuery, $options: "i" } });
+    }
+
+    if (filter.emailSearch === "true") {
+      query.push({ email: { $regex: filter.searchQuery, $options: "i" } });
+    }
+
+    if (filter.phoneNumberSearch === "true") {
+      query.push({
+        phoneNumber: { $regex: filter.searchQuery, $options: "i" },
+      });
+    }
   }
 
-  if (filter.email) {
-    filterConditions.push({
-      email: { $regex: filter.email, $options: "i" },
-    });
-  }
-
-  if (filter.phoneNumber) {
-    filterConditions.push({
-      phoneNumber: { $regex: filter.phoneNumber },
-    });
-  }
-
-  const filterCriteria = filterConditions.length
-    ? { $and: filterConditions }
-    : {};
+  const filterCriteria = query.length
+    ? { $and: [{ isDeleted: false }, { $or: [...query] }] }
+    : { isDeleted: false };
 
   const count = await User.countDocuments(filterCriteria);
   const totalPages = Math.ceil(count / limit);
-  const offset = limit * (page - 1);
+  const offset = limit * page;
 
   let users = await User.find(filterCriteria)
-    .sort({ createdAt: -1 })
+    .sort(sort)
     .skip(offset)
     .limit(limit);
 
