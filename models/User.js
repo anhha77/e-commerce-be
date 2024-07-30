@@ -26,11 +26,11 @@ const addressSchema = Schema({
 const userSchema = Schema(
   {
     avatarUrl: { type: String, required: false, default: "" },
-    username: { type: String, required: true },
-    email: { type: String, required: true },
+    username: { type: String, required: true, index: true },
+    email: { type: String, required: true, index: true },
     password: { type: String, required: true },
     birthOfDate: { type: Date, required: false, default: null },
-    phoneNumber: { type: String, required: false, default: "" },
+    phoneNumber: { type: String, required: false, default: "", index: true },
     role: {
       type: String,
       required: false,

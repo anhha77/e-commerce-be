@@ -1,6 +1,7 @@
 const { AppError, sendResponse, catchAsync } = require("../helpers/utils");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const redisClient = require("../services/redis/redisInit");
 
 const userController = {};
 
