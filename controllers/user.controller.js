@@ -1,7 +1,20 @@
 const { AppError, sendResponse, catchAsync } = require("../helpers/utils");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const redisClient = require("../services/redis/redisInit");
+const redis = require("redis");
+
+const redisClient = redis.createClient(6379);
+const redisInit = async () => {
+  redisClient.on("error", (err) => console.log("Redis Client Error", err));
+
+  redisClient.on("ready", () => console.log("Redis is ready"));
+
+  await redisClient.connect();
+
+  await redisClient.ping();
+};
+
+redisInit();
 
 const userController = {};
 
@@ -52,42 +65,60 @@ userController.getUsers = catchAsync(async (req, res, next) => {
   const sort = {};
   sort[orderBy] = sortDirection;
 
-  let query = [];
-  if (filter.searchQuery) {
-    if (filter.usernameSearch === "true") {
-      query.push({ username: { $regex: filter.searchQuery, $options: "i" } });
+  let count;
+  let totalPages;
+  let users;
+
+  const key = req.url;
+  const value = await redisClient.get(key);
+
+  if (!value) {
+    console.log("Cache miss for", key);
+    let query = [];
+    if (filter.searchQuery) {
+      if (filter.usernameSearch === "true") {
+        query.push({ username: { $regex: filter.searchQuery, $options: "i" } });
+      }
+
+      if (filter.emailSearch === "true") {
+        query.push({ email: { $regex: filter.searchQuery, $options: "i" } });
+      }
+
+      if (filter.phoneNumberSearch === "true") {
+        query.push({
+          phoneNumber: { $regex: filter.searchQuery, $options: "i" },
+        });
+      }
     }
 
-    if (filter.emailSearch === "true") {
-      query.push({ email: { $regex: filter.searchQuery, $options: "i" } });
-    }
+    const filterCriteria = query.length
+      ? { $and: [{ isDeleted: false }, { $or: [...query] }] }
+      : { isDeleted: false };
 
-    if (filter.phoneNumberSearch === "true") {
-      query.push({
-        phoneNumber: { $regex: filter.searchQuery, $options: "i" },
-      });
-    }
+    count = await User.countDocuments(filterCriteria);
+    totalPages = Math.ceil(count / limit);
+    const offset = limit * page;
+
+    users = await User.find(filterCriteria)
+      .sort(sort)
+      .skip(offset)
+      .limit(limit);
+
+    const promises = users.map(async (user) => {
+      let temp = user.toJSON();
+      return temp;
+    });
+
+    users = await Promise.all(promises);
+
+    redisClient.setEx(key, 300, JSON.stringify({ users, count, totalPages }));
+  } else {
+    console.log("Cache hit for", key);
+    const results = JSON.parse(value);
+    users = results.users;
+    count = results.count;
+    totalPages = results.totalPages;
   }
-
-  const filterCriteria = query.length
-    ? { $and: [{ isDeleted: false }, { $or: [...query] }] }
-    : { isDeleted: false };
-
-  const count = await User.countDocuments(filterCriteria);
-  const totalPages = Math.ceil(count / limit);
-  const offset = limit * page;
-
-  let users = await User.find(filterCriteria)
-    .sort(sort)
-    .skip(offset)
-    .limit(limit);
-
-  const promises = users.map(async (user) => {
-    let temp = user.toJSON();
-    return temp;
-  });
-
-  users = await Promise.all(promises);
 
   return sendResponse(
     res,
