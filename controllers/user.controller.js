@@ -1,20 +1,7 @@
 const { AppError, sendResponse, catchAsync } = require("../helpers/utils");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const redis = require("redis");
-
-const redisClient = redis.createClient(6379);
-const redisInit = async () => {
-  redisClient.on("error", (err) => console.log("Redis Client Error", err));
-
-  redisClient.on("ready", () => console.log("Redis is ready"));
-
-  await redisClient.connect();
-
-  await redisClient.ping();
-};
-
-redisInit();
+const myRedis = require("../services/redis/redisInit");
 
 const userController = {};
 
@@ -55,6 +42,7 @@ userController.getCurrentUser = catchAsync(async (req, res, next) => {
 });
 
 userController.getUsers = catchAsync(async (req, res, next) => {
+  const redisClient = await myRedis.getConnection();
   let { page, limit, ...filter } = { ...req.query };
 
   page = parseInt(page) || 0;

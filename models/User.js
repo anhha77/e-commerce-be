@@ -16,12 +16,15 @@ const cartItemSchema = Schema(
   { timestamps: true }
 );
 
-const addressSchema = Schema({
-  addressLocation: { type: String, required: true },
-  country: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
-  isDefault: { type: Boolean, required: true, default: false },
-});
+const addressSchema = Schema(
+  {
+    addressLocation: { type: String, required: true },
+    country: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
+    isDefault: { type: Boolean, required: true, default: false },
+  },
+  { timestamps: true }
+);
 
 const userSchema = Schema(
   {

@@ -89,8 +89,17 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  * @route PUT /users/:id
  * @description Update user profile
  * @body {avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
- * @access Login required
+ * @access Login required (Admin)
  */
+```
+
+```javascript
+/**
+ * @route PUT /users/me
+ * @description Update user profile
+ @body {avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
+ * @access Login required 
+*/
 ```
 
 ```javascript
@@ -106,6 +115,30 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  * @route GET /users/:id
  * @description Get detail of a user
  * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route POST /users
+ * @description Create a user
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route DELETE /users/:id
+ * @description Delete user account
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route DELETE /users/me
+ * @description Delete user account
+ * @access Login required
  */
 ```
 
