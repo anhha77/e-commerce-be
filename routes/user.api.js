@@ -62,4 +62,13 @@ router.get(
   userController.getSingleUser
 );
 
+/**
+ * @route PUT /users/me
+ * @description Update user profile
+ @body {avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
+ * @access Login required 
+*/
+
+router.put("/me", authentication.loginRequired, userController.updateProfile);
+
 module.exports = router;

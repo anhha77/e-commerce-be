@@ -129,4 +129,41 @@ userController.getSingleUser = catchAsync(async (req, res, next) => {
   return sendResponse(res, 200, true, user, null, "Get user successfully");
 });
 
+userController.updateProfile = catchAsync(async (req, res, next) => {
+  const currentUserId = req.userId;
+
+  let user = await User.findById(currentUserId, "+password");
+  if (!user) throw new AppError(400, "User not found", "Update user error");
+
+  const allows = [
+    "avatartUrl",
+    "birthOfDate",
+    "phoneNumber",
+    "cartItem",
+    "address",
+  ];
+
+  allows.forEach((field) => {
+    if (req.body[field] !== undefined) {
+      user[field] = req.body[field];
+    }
+  });
+
+  if (req.body["oldPassword"] !== undefined && req.body["newPassword"]) {
+    const isMatch = await bcrypt.compare(
+      req.body["oldPassword"],
+      user.password
+    );
+    if (!isMatch)
+      throw new AppError(400, "Invalid Credentials", "Update user error");
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(req.body["newPassword"], salt);
+    user["password"] = password;
+  }
+
+  await user.save();
+
+  return sendResponse(res, 200, true, user, null, "Update user successfully");
+});
+
 module.exports = userController;
