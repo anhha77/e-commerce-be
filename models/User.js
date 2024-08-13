@@ -32,7 +32,7 @@ const userSchema = Schema(
     username: { type: String, required: true, index: true },
     email: { type: String, required: true, index: true },
     password: { type: String, required: true },
-    birthOfDate: { type: Date, required: false, default: null },
+    birthOfDate: { type: String, required: false, default: null },
     phoneNumber: { type: String, required: false, default: "", index: true },
     role: {
       type: String,

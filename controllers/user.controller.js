@@ -136,7 +136,7 @@ userController.updateProfile = catchAsync(async (req, res, next) => {
   if (!user) throw new AppError(400, "User not found", "Update user error");
 
   const allows = [
-    "avatartUrl",
+    "avatarUrl",
     "birthOfDate",
     "phoneNumber",
     "cartItem",
@@ -149,7 +149,10 @@ userController.updateProfile = catchAsync(async (req, res, next) => {
     }
   });
 
-  if (req.body["oldPassword"] !== undefined && req.body["newPassword"]) {
+  if (
+    req.body["oldPassword"] !== undefined &&
+    req.body["newPassword"] !== undefined
+  ) {
     const isMatch = await bcrypt.compare(
       req.body["oldPassword"],
       user.password
