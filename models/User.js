@@ -2,7 +2,12 @@ const mongoose = require("mongoose");
 const { Roles } = require("../helpers/constant");
 const Schema = mongoose.Schema;
 const jwt = require("jsonwebtoken");
+const { AppError } = require("../helpers/utils");
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
+
+function arrayLimit(val) {
+  return val.length <= 4;
+}
 
 const cartItemSchema = Schema(
   {
@@ -64,6 +69,21 @@ userSchema.methods.generateToken = async function () {
   );
   return accessToken;
 };
+
+userSchema.pre("validate", function (next) {
+  try {
+    if (this.address.length > 4) {
+      throw new AppError(
+        400,
+        "Each user can have only 4 address",
+        "Update User Error"
+      );
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 const User = mongoose.model("User", userSchema, "Users");
 module.exports = User;
