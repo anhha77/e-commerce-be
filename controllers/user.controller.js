@@ -33,13 +33,15 @@ userController.register = catchAsync(async (req, res, next) => {
 userController.getCurrentUser = catchAsync(async (req, res, next) => {
   const currentUserId = req.userId;
 
-  let user = await User.findById(currentUserId).sort({
-    "address.isDefault": -1,
-  });
+  let user = User.findById(currentUserId);
+
   if (!user)
     throw new AppError(400, "User Not Found", "Get Current User Error");
 
   user = user.toJSON();
+  // let address = user.address.sort((a, b) => b.isDefault - a.isDefault);
+  // address = address.sort((a, b) => b.updatedAt - a.updatedAt);
+  user.address = address;
 
   sendResponse(res, 200, true, user, null, "Get Current User Successfully");
 });
