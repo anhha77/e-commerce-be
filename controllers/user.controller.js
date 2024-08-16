@@ -2,6 +2,7 @@ const { AppError, sendResponse, catchAsync } = require("../helpers/utils");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const myRedis = require("../services/redis/redisInit");
+const { default: mongoose } = require("mongoose");
 
 const userController = {};
 
@@ -31,17 +32,25 @@ userController.register = catchAsync(async (req, res, next) => {
 });
 
 userController.getCurrentUser = catchAsync(async (req, res, next) => {
-  const currentUserId = req.userId;
+  let currentUserId = req.userId;
+  currentUserId = new mongoose.Types.ObjectId(currentUserId);
+  // let user = User.findById(currentUserId);
+  const address = await User.aggregate([
+    { $match: { _id: currentUserId } },
+    { $unwind: "$address" },
+    { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
+    { $group: { _id: "$_id", address: { $push: "$address" } } },
+    { $project: { _id: 0 } },
+  ]).exec();
 
-  let user = User.findById(currentUserId);
+  const addressList = address[0]["address"];
+
+  let user = await User.findById(currentUserId);
+  user = user.toJSON();
+  user.address = addressList;
 
   if (!user)
     throw new AppError(400, "User Not Found", "Get Current User Error");
-
-  user = user.toJSON();
-  // let address = user.address.sort((a, b) => b.isDefault - a.isDefault);
-  // address = address.sort((a, b) => b.updatedAt - a.updatedAt);
-  user.address = address;
 
   sendResponse(res, 200, true, user, null, "Get Current User Successfully");
 });
