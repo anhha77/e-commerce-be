@@ -71,4 +71,21 @@ router.get(
 
 router.put("/me", authentication.loginRequired, userController.updateProfile);
 
+/**
+ * @route PUT /users/:id
+ * @description Update user profile
+ * @body {avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
+ * @access Login required (Admin)
+ */
+
+router.put(
+  "/:id",
+  authentication.loginRequired,
+  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
+  validators.validate([
+    param("id").exists().isString().custom(validators.checkObjectId),
+  ]),
+  userController.updateCustomerProfile
+);
+
 module.exports = router;

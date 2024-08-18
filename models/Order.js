@@ -51,7 +51,12 @@ const orderSchema = Schema(
     orderItem: [orderItemSchema],
     orderDate: { type: Date, required: true },
     paymentMethod: { type: String, required: true, enum: ["paypal", "cash"] },
-    account: { type: String, required: false, default: "" },
+    accountNumber: { type: String, default: "" },
+    paymentDestination: {
+      type: Schema.ObjectId,
+      require: true,
+      ref: "CreditAdminAccount",
+    },
     shippingAddress: {
       type: Schema.ObjectId,
       required: true,
