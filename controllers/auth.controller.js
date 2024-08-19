@@ -15,18 +15,18 @@ authController.loginWithUsernameAndPass = catchAsync(async (req, res, next) => {
 
   const accessToken = await user.generateToken();
 
-  if (user.address.length > 0) {
-    const address = await User.aggregate([
-      { $match: { _id: user._id } },
-      { $unwind: "$address" },
-      { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
-      { $group: { _id: "$_id", address: { $push: "$address" } } },
-      { $project: { _id: 0 } },
-    ]).exec();
+  // if (user.address.length > 0) {
+  //   const address = await User.aggregate([
+  //     { $match: { _id: user._id } },
+  //     { $unwind: "$address" },
+  //     { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
+  //     { $group: { _id: "$_id", address: { $push: "$address" } } },
+  //     { $project: { _id: 0 } },
+  //   ]).exec();
 
-    const addressList = address[0]["address"];
-    user.address = addressList;
-  }
+  //   const addressList = address[0]["address"];
+  //   user.address = addressList;
+  // }
 
   user = user.toJSON();
 

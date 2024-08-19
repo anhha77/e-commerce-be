@@ -8,7 +8,6 @@ const userController = {};
 
 userController.register = catchAsync(async (req, res, next) => {
   let { username, email, password } = req.body;
-  const currentUserId = req.userId;
 
   let user = await User.findOne({ email });
   if (user) {
@@ -40,18 +39,18 @@ userController.getCurrentUser = catchAsync(async (req, res, next) => {
   if (!user)
     throw new AppError(400, "User Not Found", "Get Current User Error");
 
-  if (user.address.length > 0) {
-    const address = await User.aggregate([
-      { $match: { _id: currentUserId } },
-      { $unwind: "$address" },
-      { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
-      { $group: { _id: "$_id", address: { $push: "$address" } } },
-      { $project: { _id: 0 } },
-    ]).exec();
+  // if (user.address.length > 0) {
+  //   const address = await User.aggregate([
+  //     { $match: { _id: currentUserId } },
+  //     { $unwind: "$address" },
+  //     { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
+  //     { $group: { _id: "$_id", address: { $push: "$address" } } },
+  //     { $project: { _id: 0 } },
+  //   ]).exec();
 
-    const addressList = address[0]["address"];
-    user.address = addressList;
-  }
+  //   const addressList = address[0]["address"];
+  //   user.address = addressList;
+  // }
 
   user = user.toJSON();
 
@@ -142,18 +141,18 @@ userController.getSingleUser = catchAsync(async (req, res, next) => {
   let user = await User.findById(userId);
   if (!user) throw new AppError(400, "User not found", "Get user error");
 
-  if (user.address.length > 0) {
-    const address = await User.aggregate([
-      { $match: { _id: userId } },
-      { $unwind: "$address" },
-      { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
-      { $group: { _id: "$_id", address: { $push: "$address" } } },
-      { $project: { _id: 0 } },
-    ]).exec();
+  // if (user.address.length > 0) {
+  //   const address = await User.aggregate([
+  //     { $match: { _id: userId } },
+  //     { $unwind: "$address" },
+  //     { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
+  //     { $group: { _id: "$_id", address: { $push: "$address" } } },
+  //     { $project: { _id: 0 } },
+  //   ]).exec();
 
-    const addressList = address[0]["address"];
-    user.address = addressList;
-  }
+  //   const addressList = address[0]["address"];
+  //   user.address = addressList;
+  // }
 
   user = user.toJSON();
 
@@ -199,20 +198,19 @@ userController.updateProfile = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  // if (user.address.length > 0) {
-  //   const address = await User.aggregate([
-  //     { $match: { _id: currentUserId } },
-  //     { $unwind: "$address" },
-  //     { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
-  //     { $group: { _id: "$_id", address: { $push: "$address" } } },
-  //     { $project: { _id: 0 } },
-  //   ]).exec();
-  //   const addressList = address[0]["address"];
-  //   console.log(addressList);
-  //   user.address = addressList;
-  // }
+  if (user.address.length > 0) {
+    const address = await User.aggregate([
+      { $match: { _id: currentUserId } },
+      { $unwind: "$address" },
+      { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
+      { $group: { _id: "$_id", address: { $push: "$address" } } },
+      { $project: { _id: 0 } },
+    ]).exec();
+    const addressList = address[0]["address"];
+    user.address = addressList;
+  }
 
-  // await user.save();
+  await user.save();
 
   return sendResponse(
     res,
@@ -248,20 +246,20 @@ userController.updateCustomerProfile = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  // if (user.address.length > 0) {
-  //   const address = await User.aggregate([
-  //     { $match: { _id: userId } },
-  //     { $unwind: "$address" },
-  //     { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
-  //     { $group: { _id: "$_id", address: { $push: "$address" } } },
-  //     { $project: { _id: 0 } },
-  //   ]).exec();
+  if (user.address.length > 0) {
+    const address = await User.aggregate([
+      { $match: { _id: userId } },
+      { $unwind: "$address" },
+      { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
+      { $group: { _id: "$_id", address: { $push: "$address" } } },
+      { $project: { _id: 0 } },
+    ]).exec();
 
-  //   const addressList = address[0]["address"];
-  //   user.address = addressList;
-  // }
+    const addressList = address[0]["address"];
+    user.address = addressList;
+  }
 
-  // await user.save();
+  await user.save();
 
   return sendResponse(
     res,
