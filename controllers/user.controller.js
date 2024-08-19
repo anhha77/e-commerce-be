@@ -39,19 +39,6 @@ userController.getCurrentUser = catchAsync(async (req, res, next) => {
   if (!user)
     throw new AppError(400, "User Not Found", "Get Current User Error");
 
-  // if (user.address.length > 0) {
-  //   const address = await User.aggregate([
-  //     { $match: { _id: currentUserId } },
-  //     { $unwind: "$address" },
-  //     { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
-  //     { $group: { _id: "$_id", address: { $push: "$address" } } },
-  //     { $project: { _id: 0 } },
-  //   ]).exec();
-
-  //   const addressList = address[0]["address"];
-  //   user.address = addressList;
-  // }
-
   user = user.toJSON();
 
   sendResponse(res, 200, true, user, null, "Get Current User Successfully");
@@ -140,19 +127,6 @@ userController.getSingleUser = catchAsync(async (req, res, next) => {
 
   let user = await User.findById(userId);
   if (!user) throw new AppError(400, "User not found", "Get user error");
-
-  // if (user.address.length > 0) {
-  //   const address = await User.aggregate([
-  //     { $match: { _id: userId } },
-  //     { $unwind: "$address" },
-  //     { $sort: { "address.isDefault": -1, "address.updatedAt": -1 } },
-  //     { $group: { _id: "$_id", address: { $push: "$address" } } },
-  //     { $project: { _id: 0 } },
-  //   ]).exec();
-
-  //   const addressList = address[0]["address"];
-  //   user.address = addressList;
-  // }
 
   user = user.toJSON();
 
