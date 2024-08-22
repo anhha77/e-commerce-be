@@ -104,7 +104,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route GET /users
+ * @route GET /admin/users
  * @description Get all users with filter
  * @access Login required (Admin)
  */
