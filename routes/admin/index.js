@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const userApi = require("./user.api");
-router.use("/user", userApi);
+router.use("/users", userApi);
 
 const paymentApi = require("./payment.api");
 router.use("/payment", paymentApi);

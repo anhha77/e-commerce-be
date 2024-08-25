@@ -20,14 +20,39 @@ userController.register = catchAsync(async (req, res, next) => {
   const accessToken = await user.generateToken();
   user = user.toJSON();
 
-  sendResponse(
+  return sendResponse(
     res,
     200,
     true,
     { user, accessToken },
     null,
-    "Create User Successful"
+    "Create User Successfully"
   );
+});
+
+userController.createUser = catchAsync(async (req, res, next) => {
+  let { username, email, password } = req.body;
+  const allows = ["avatarUrl", "birthOfDate", "phoneNumber", "role", "address"];
+  const data = {};
+  let user = await User.findOne({ email });
+  if (user) {
+    throw new AppError(400, "User already exist", "Registration Error");
+  }
+
+  data.username = username;
+  data.email = email;
+  const salt = await bcrypt.genSalt(10);
+  password = await bcrypt.hash(password, salt);
+  data.password = password;
+  allows.forEach((field) => {
+    if (req.body[field] !== undefined) {
+      data[field] = req.body[field];
+    }
+  });
+
+  user = await User.create(data);
+  user = user.toJSON();
+  return sendResponse(res, 200, true, user, null, "Create User Successfully");
 });
 
 userController.getCurrentUser = catchAsync(async (req, res, next) => {
@@ -243,6 +268,36 @@ userController.updateCustomerProfile = catchAsync(async (req, res, next) => {
     null,
     "Update customer successfully"
   );
+});
+
+userController.deleteCurrentUser = catchAsync(async (req, res, next) => {
+  const currentUserId = req.userId;
+
+  let user = await User.findById(currentUserId);
+  if (!user) throw new AppError(400, "User Not Found", "Delete User Error");
+
+  user = await User.findByIdAndUpdate(
+    currentUserId,
+    { isDeleted: true },
+    { new: true }
+  );
+
+  return sendResponse(res, 200, true, user, null, "Delete User Successfully");
+});
+
+userController.deleteSingleUser = catchAsync(async (req, res, next) => {
+  const userId = req.params.id;
+
+  let user = await User.findById(userId);
+  if (!user) throw new AppError(400, "User Not Found", "Delete User Error");
+
+  user = await User.findByIdAndUpdate(
+    userId,
+    { isDeleted: true },
+    { new: true }
+  );
+
+  return sendResponse(res, 200, true, user, null, "Delete User Successfully");
 });
 
 module.exports = userController;

@@ -34,35 +34,6 @@ router.post(
 router.get("/me", authentication.loginRequired, userController.getCurrentUser);
 
 /**
- * @route GET /users
- * @description Get all users with filter
- * @access Login required (Admin)
- */
-
-router.get(
-  "/",
-  authentication.loginRequired,
-  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
-  userController.getUsers
-);
-
-/**
- * @route GET /users/:id
- * @description Get detail of a user
- * @access Login required (Admin)
- */
-
-router.get(
-  "/:id",
-  authentication.loginRequired,
-  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
-  validators.validate([
-    param("id").exists().isString().custom(validators.checkObjectId),
-  ]),
-  userController.getSingleUser
-);
-
-/**
  * @route PUT /users/me
  * @description Update user profile
  @body {avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
@@ -72,20 +43,15 @@ router.get(
 router.put("/me", authentication.loginRequired, userController.updateProfile);
 
 /**
- * @route PUT /users/:id
- * @description Update user profile
- * @body {avatarUrl, password, birthOfDate, phoneNumber, cartItemId, addressId}
- * @access Login required (Admin)
+ * @route DELETE /users/me
+ * @description Delete user account
+ * @access Login required
  */
 
-router.put(
-  "/:id",
+router.delete(
+  "/me",
   authentication.loginRequired,
-  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
-  validators.validate([
-    param("id").exists().isString().custom(validators.checkObjectId),
-  ]),
-  userController.updateCustomerProfile
+  userController.deleteCurrentUser
 );
 
 module.exports = router;

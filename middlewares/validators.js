@@ -1,5 +1,6 @@
-const { sendResponse } = require("../helpers/utils");
+const { sendResponse, AppError } = require("../helpers/utils");
 const { validationResult } = require("express-validator");
+const { body } = require("express-validator");
 const mongoose = require("mongoose");
 
 const validators = {};
@@ -20,6 +21,30 @@ validators.checkObjectId = (paramId) => {
   if (!mongoose.Types.ObjectId.isValid(paramId)) {
     throw new Error("Invalid Object Id");
   }
+  return true;
+};
+
+validators.checkAddressField = (value) => {
+  value.forEach((address) => {
+    if (!address.addressLocation || address.addressLocation.length === 0) {
+      throw new Error("Invalid address location");
+    }
+
+    if (!address.country || address.country.length === 0) {
+      throw new Error("Invalid country");
+    }
+
+    if (!address.phoneNumber || address.phoneNumber.length === 0) {
+      throw new Error("Invalid phone number");
+    }
+
+    if (
+      address.isDefault === undefined ||
+      typeof address.isDefault !== "boolean"
+    ) {
+      throw new Error("Invalid value");
+    }
+  });
   return true;
 };
 
