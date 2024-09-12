@@ -128,6 +128,16 @@ userController.getUsers = catchAsync(async (req, res, next) => {
     users = await Promise.all(promises);
 
     redisClient.setEx(key, 300, JSON.stringify({ users, count, totalPages }));
+
+    for (const user of users) {
+      let urlList = await redisClient.get(`${user._id}`);
+      urlList = JSON.parse(urlList);
+      if (!urlList) {
+        urlList = [];
+      }
+      urlList = [...urlList, key];
+      redisClient.setEx(`${user._id}`, 300, JSON.stringify(urlList));
+    }
   } else {
     console.log("Cache hit for", key);
     const results = JSON.parse(value);
@@ -161,6 +171,7 @@ userController.getSingleUser = catchAsync(async (req, res, next) => {
 userController.updateProfile = catchAsync(async (req, res, next) => {
   let currentUserId = req.userId;
   currentUserId = new mongoose.Types.ObjectId(currentUserId);
+  const redisClient = await myRedis.getConnection();
 
   let user = await User.findById(currentUserId, "+password");
 
@@ -210,6 +221,8 @@ userController.updateProfile = catchAsync(async (req, res, next) => {
   }
 
   await user.save();
+
+  const urlList = await redisClient.get(`${currentUserId}`);
 
   return sendResponse(
     res,
