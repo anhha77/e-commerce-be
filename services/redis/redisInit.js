@@ -29,6 +29,14 @@ class Redis {
       return this.client;
     }
   }
+
+  async validateData(redisClient, userId) {
+    let urlList = await redisClient.get(`${userId}`);
+    if (urlList) {
+      urlList = JSON.parse(urlList);
+      this.client.del(urlList);
+    }
+  }
 }
 
 module.exports = new Redis();

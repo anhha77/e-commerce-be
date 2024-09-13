@@ -222,7 +222,7 @@ userController.updateProfile = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  const urlList = await redisClient.get(`${currentUserId}`);
+  await myRedis.validateData(redisClient, `${currentUserId}`);
 
   return sendResponse(
     res,
@@ -237,6 +237,7 @@ userController.updateProfile = catchAsync(async (req, res, next) => {
 userController.updateCustomerProfile = catchAsync(async (req, res, next) => {
   let userId = req.params.id;
   userId = new mongoose.Types.ObjectId(userId);
+  const redisClient = await myRedis.getConnection();
 
   let user = await User.findById(userId);
 
@@ -273,6 +274,8 @@ userController.updateCustomerProfile = catchAsync(async (req, res, next) => {
 
   await user.save();
 
+  await myRedis.validateData(redisClient, `${userId}`);
+
   return sendResponse(
     res,
     200,
@@ -300,6 +303,7 @@ userController.deleteCurrentUser = catchAsync(async (req, res, next) => {
 
 userController.deleteSingleUser = catchAsync(async (req, res, next) => {
   const userId = req.params.id;
+  const redisClient = await myRedis.getConnection();
 
   let user = await User.findById(userId);
   if (!user) throw new AppError(400, "User Not Found", "Delete User Error");
@@ -309,6 +313,8 @@ userController.deleteSingleUser = catchAsync(async (req, res, next) => {
     { isDeleted: true },
     { new: true }
   );
+
+  await myRedis.validateData(redisClient, `${userId}`);
 
   return sendResponse(res, 200, true, user, null, "Delete User Successfully");
 });
