@@ -85,6 +85,14 @@ userController.getUsers = catchAsync(async (req, res, next) => {
   let totalPages;
   let users;
 
+  let countActive;
+  let totalPagesActive;
+  let usersActive;
+
+  let countDeleted;
+  let totalPagesDeleted;
+  let usersDeleted;
+
   const key = req.url;
   const value = await redisClient.get(key);
 
@@ -107,27 +115,72 @@ userController.getUsers = catchAsync(async (req, res, next) => {
       }
     }
 
-    const filterCriteria = query.length
+    const filterCriteria = query.length ? { $or: [...query] } : {};
+
+    const filterCriteriaActive = query.length
       ? { $and: [{ isDeleted: false }, { $or: [...query] }] }
       : { isDeleted: false };
 
+    const filterCriteriaDeleted = query.length
+      ? { $and: [{ isDeleted: true }, { $or: [...query] }] }
+      : { isDeleted: true };
+
     count = await User.countDocuments(filterCriteria);
     totalPages = Math.ceil(count / limit);
+
+    countActive = await User.countDocuments(filterCriteriaActive);
+    totalPagesActive = Math.ceil(countActive / limit);
+
+    countDeleted = await User.countDocuments(filterCriteriaDeleted);
+    totalPagesDeleted = Math.ceil(countDeleted / limit);
+
     const offset = limit * page;
 
     users = await User.find(filterCriteria)
       .sort(sort)
       .skip(offset)
       .limit(limit);
-
     const promises = users.map(async (user) => {
       let temp = user.toJSON();
       return temp;
     });
-
     users = await Promise.all(promises);
 
-    redisClient.setEx(key, 300, JSON.stringify({ users, count, totalPages }));
+    usersActive = await User.find(filterCriteriaActive)
+      .sort(sort)
+      .skip(offset)
+      .limit(limit);
+    const promisesActive = usersActive.map(async (user) => {
+      let temp = user.toJSON();
+      return temp;
+    });
+    usersActive = await Promise.all(promisesActive);
+
+    usersDeleted = await User.find(filterCriteriaDeleted)
+      .sort(sort)
+      .skip(offset)
+      .limit(limit);
+    const promisesDeleted = usersDeleted.map(async (user) => {
+      let temp = user.toJSON();
+      return temp;
+    });
+    usersDeleted = await Promise.all(promisesDeleted);
+
+    redisClient.setEx(
+      key,
+      300,
+      JSON.stringify({
+        users,
+        count,
+        totalPages,
+        usersActive,
+        countActive,
+        totalPagesActive,
+        usersDeleted,
+        countDeleted,
+        totalPagesDeleted,
+      })
+    );
 
     for (const user of users) {
       let urlList = await redisClient.get(`${user._id}`);
@@ -141,16 +194,35 @@ userController.getUsers = catchAsync(async (req, res, next) => {
   } else {
     console.log("Cache hit for", key);
     const results = JSON.parse(value);
+
     users = results.users;
     count = results.count;
     totalPages = results.totalPages;
+
+    usersActive = results.usersActive;
+    countActive = results.countActive;
+    totalPagesActive = results.totalPagesActive;
+
+    usersDeleted = results.usersDeleted;
+    countDeleted = results.countDeleted;
+    totalPagesDeleted = results.totalPagesDeleted;
   }
 
   return sendResponse(
     res,
     200,
     true,
-    { users, count, totalPages },
+    {
+      users,
+      count,
+      totalPages,
+      usersActive,
+      countActive,
+      totalPagesActive,
+      usersDeleted,
+      countDeleted,
+      totalPagesDeleted,
+    },
     null,
     "Get users successfully"
   );
@@ -288,6 +360,7 @@ userController.updateCustomerProfile = catchAsync(async (req, res, next) => {
 
 userController.deleteCurrentUser = catchAsync(async (req, res, next) => {
   const currentUserId = req.userId;
+  const redisClient = myRedis.getConnection();
 
   let user = await User.findById(currentUserId);
   if (!user) throw new AppError(400, "User Not Found", "Delete User Error");
@@ -297,6 +370,8 @@ userController.deleteCurrentUser = catchAsync(async (req, res, next) => {
     { isDeleted: true },
     { new: true }
   );
+
+  await myRedis.validateData(redisClient, `${currentUserId}`);
 
   return sendResponse(res, 200, true, user, null, "Delete User Successfully");
 });
