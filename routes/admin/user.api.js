@@ -95,4 +95,28 @@ router.delete(
   userController.deleteSingleUser
 );
 
+/**
+ * @route DELETE /admin/users/multi
+ * @description Delete multiple users
+ * @accessssss Login required (Admin)
+ */
+
+/**
+ * @route PUT /admin/users/restore/:id
+ * @description Restore user
+ * @access Login required (Admin)
+ */
+
+/**
+ * @route DELETE /admin/users/pernament/:id
+ * @description Delete pernament user
+ * @accessssss Login required (Admin)
+ */
+
+/**
+ * @route DELETE /admin/users/pernament/multi
+ * @description Delete pernament multiple users
+ * @accessssss Login required (Admin)
+ */
+
 module.exports = router;
