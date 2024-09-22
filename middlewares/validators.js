@@ -24,6 +24,15 @@ validators.checkObjectId = (paramId) => {
   return true;
 };
 
+validators.checkUsersIdField = (usersIdList) => {
+  usersIdList.forEach((userId) => {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      throw new Error("Invalid Object Id");
+    }
+  });
+  return true;
+};
+
 validators.checkAddressField = (value) => {
   value.forEach((address) => {
     if (!address.addressLocation || address.addressLocation.length === 0) {

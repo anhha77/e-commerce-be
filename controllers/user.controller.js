@@ -365,6 +365,9 @@ userController.deleteCurrentUser = catchAsync(async (req, res, next) => {
   let user = await User.findById(currentUserId);
   if (!user) throw new AppError(400, "User Not Found", "Delete User Error");
 
+  if (user.isDeleted)
+    throw new AppError(400, "User is already deleted", "Delete User Error");
+
   user = await User.findByIdAndUpdate(
     currentUserId,
     { isDeleted: true },
@@ -383,6 +386,9 @@ userController.deleteSingleUser = catchAsync(async (req, res, next) => {
   let user = await User.findById(userId);
   if (!user) throw new AppError(400, "User Not Found", "Delete User Error");
 
+  if (user.isDeleted)
+    throw new AppError(400, "User Is Already Deleted", "Delete User Error");
+
   user = await User.findByIdAndUpdate(
     userId,
     { isDeleted: true },
@@ -393,5 +399,125 @@ userController.deleteSingleUser = catchAsync(async (req, res, next) => {
 
   return sendResponse(res, 200, true, user, null, "Delete User Successfully");
 });
+
+userController.deleteMultiUsers = catchAsync(async (req, res, next) => {
+  const { usersIdDeleted } = req.body;
+  const redisClient = await myRedis.getConnection();
+
+  const promises = usersIdDeleted.map(async (userId) => {
+    let user = await User.findById(userId);
+    if (!user) throw new AppError(400, "User Not Found", "Delete User Error");
+
+    if (user.isDeleted)
+      throw new AppError(400, "User Is Already Deleted", "Delete User Error");
+
+    let temp = await User.findByIdAndUpdate(
+      userId,
+      { isDeleted: true },
+      { new: true }
+    );
+    return temp;
+  });
+
+  const usersDeleted = await Promise.all(promises);
+
+  for (const userId of usersIdDeleted) {
+    await myRedis.validateData(redisClient, `${userId}`);
+  }
+
+  return sendResponse(
+    res,
+    200,
+    true,
+    usersDeleted,
+    null,
+    "Delete User Successfully"
+  );
+});
+
+userController.restoreUser = catchAsync(async (req, res, next) => {
+  const userId = req.params.id;
+  const redisClient = await myRedis.getConnection();
+
+  let user = await User.findById(userId);
+  if (!user) throw new AppError(400, "User Not Found", "Restore User Error");
+
+  if (!user.isDeleted)
+    throw new AppError(400, "User Is Active", "Restore User Error");
+
+  const userRestore = await User.findByIdAndUpdate(
+    userId,
+    { isDeleted: false },
+    { new: true }
+  );
+
+  await myRedis.validateData(redisClient, `${userId}`);
+
+  return sendResponse(
+    res,
+    200,
+    true,
+    userRestore,
+    null,
+    "Restore User Successfully"
+  );
+});
+
+userController.deletePernamentUser = catchAsync(async (req, res, next) => {
+  const userId = req.params.id;
+  const redisClient = await myRedis.getConnection();
+
+  let user = await User.findById(userId);
+  if (!user)
+    throw new AppError(400, "User Not Found", "Delete Pernament User Error");
+
+  const userDeletePernament = await User.findByIdAndDelete(userId);
+
+  await myRedis.validateData(redisClient, `${userId}`);
+
+  return sendResponse(
+    res,
+    200,
+    true,
+    userDeletePernament,
+    null,
+    "Delete Pernament User Successfully"
+  );
+});
+
+userController.deletePernamentMultiUsers = catchAsync(
+  async (req, res, next) => {
+    const { usersIdDeleted } = req.body;
+    const redisClient = await myRedis.getConnection();
+
+    const promises = usersIdDeleted.map(async (userId) => {
+      let user = await User.findById(userId);
+      if (!user)
+        throw new AppError(
+          400,
+          "User Not Found",
+          "Delete Pernament User Error"
+        );
+
+      let temp = await User.findByIdAndDelete(userId);
+      return temp;
+    });
+
+    const usersDeleted = await Promise.all(promises);
+
+    for (const userId of usersIdDeleted) {
+      await myRedis.validateData(redisClient, `${userId}`);
+    }
+
+    return sendResponse(
+      res,
+      200,
+      true,
+      usersDeleted,
+      null,
+      "Delete Pernament User Successfully"
+    );
+  }
+);
 
 module.exports = userController;

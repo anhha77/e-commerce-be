@@ -40,7 +40,20 @@ router.get("/me", authentication.loginRequired, userController.getCurrentUser);
  * @access Login required 
 */
 
-router.put("/me", authentication.loginRequired, userController.updateProfile);
+router.put(
+  "/me",
+  authentication.loginRequired,
+  validators.validate([
+    body("avatarUrl", "Invalid avartarUrl").optional().notEmpty(),
+    body("birthOfDate", "Invalid birthdate").optional().notEmpty(),
+    body("phoneNumber", "Invalid phone number")
+      .optional()
+      .notEmpty()
+      .isNumeric(),
+    body("address").optional().custom(validators.checkAddressField),
+  ]),
+  userController.updateProfile
+);
 
 /**
  * @route DELETE /users/me

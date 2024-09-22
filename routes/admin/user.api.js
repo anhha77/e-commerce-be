@@ -75,6 +75,13 @@ router.put(
   (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
   validators.validate([
     param("id").exists().isString().custom(validators.checkObjectId),
+    body("avatarUrl", "Invalid avartarUrl").optional().notEmpty(),
+    body("birthOfDate", "Invalid birthdate").optional().notEmpty(),
+    body("phoneNumber", "Invalid phone number")
+      .optional()
+      .notEmpty()
+      .isNumeric(),
+    body("address").optional().custom(validators.checkAddressField),
   ]),
   userController.updateCustomerProfile
 );
@@ -96,10 +103,23 @@ router.delete(
 );
 
 /**
- * @route DELETE /admin/users/multi
+ * @route DELETE /admin/users/delete/multi
  * @description Delete multiple users
  * @accessssss Login required (Admin)
  */
+
+router.delete(
+  "/delete/multi",
+  authentication.loginRequired,
+  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
+  validators.validate([
+    body("usersIdDeleted")
+      .exists()
+      .isArray()
+      .custom(validators.checkUsersIdField),
+  ]),
+  userController.deleteMultiUsers
+);
 
 /**
  * @route PUT /admin/users/restore/:id
@@ -107,16 +127,49 @@ router.delete(
  * @access Login required (Admin)
  */
 
+router.put(
+  "/restore/:id",
+  authentication.loginRequired,
+  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
+  validators.validate([
+    param("id").exists().isString().custom(validators.checkObjectId),
+  ]),
+  userController.restoreUser
+);
+
 /**
  * @route DELETE /admin/users/pernament/:id
  * @description Delete pernament user
  * @accessssss Login required (Admin)
  */
 
+router.delete(
+  "/pernament/:id",
+  authentication.loginRequired,
+  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
+  validators.validate([
+    param("id").exists().isString().custom(validators.checkObjectId),
+  ]),
+  userController.deletePernamentUser
+);
+
 /**
- * @route DELETE /admin/users/pernament/multi
+ * @route DELETE /admin/users/pernament/delete/multi
  * @description Delete pernament multiple users
  * @accessssss Login required (Admin)
  */
+
+router.delete(
+  "/pernament/delete/multi",
+  authentication.loginRequired,
+  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
+  validators.validate([
+    body("usersIdDeleted")
+      .exists()
+      .isArray()
+      .custom(validators.checkUsersIdField),
+  ]),
+  userController.deletePernamentMultiUsers
+);
 
 module.exports = router;
