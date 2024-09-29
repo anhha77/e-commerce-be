@@ -25,6 +25,7 @@ validators.checkObjectId = (paramId) => {
 };
 
 validators.checkUsersIdField = (usersIdList) => {
+  usersIdList = usersIdList.split(",");
   usersIdList.forEach((userId) => {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       throw new Error("Invalid Object Id");

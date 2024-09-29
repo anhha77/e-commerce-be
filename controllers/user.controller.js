@@ -401,7 +401,8 @@ userController.deleteSingleUser = catchAsync(async (req, res, next) => {
 });
 
 userController.deleteMultiUsers = catchAsync(async (req, res, next) => {
-  const { usersIdDeleted } = req.body;
+  let { usersIdDeleted } = req.query;
+  usersIdDeleted = usersIdDeleted.split(",");
   const redisClient = await myRedis.getConnection();
 
   const promises = usersIdDeleted.map(async (userId) => {
@@ -487,7 +488,8 @@ userController.deletePernamentUser = catchAsync(async (req, res, next) => {
 
 userController.deletePernamentMultiUsers = catchAsync(
   async (req, res, next) => {
-    const { usersIdDeleted } = req.body;
+    let { usersIdDeleted } = req.query;
+    usersIdDeleted = usersIdDeleted.split(",");
     const redisClient = await myRedis.getConnection();
 
     const promises = usersIdDeleted.map(async (userId) => {

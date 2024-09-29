@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../../controllers/user.controller");
-const { body, param } = require("express-validator");
+const { body, param, query } = require("express-validator");
 const validators = require("../../middlewares/validators");
 const authentication = require("../../middlewares/authentication");
 
@@ -113,10 +113,7 @@ router.delete(
   authentication.loginRequired,
   (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
   validators.validate([
-    body("usersIdDeleted")
-      .exists()
-      .isArray()
-      .custom(validators.checkUsersIdField),
+    query("usersIdDeleted").exists().custom(validators.checkUsersIdField),
   ]),
   userController.deleteMultiUsers
 );
@@ -164,10 +161,7 @@ router.delete(
   authentication.loginRequired,
   (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
   validators.validate([
-    body("usersIdDeleted")
-      .exists()
-      .isArray()
-      .custom(validators.checkUsersIdField),
+    query("usersIdDeleted").exists().custom(validators.checkUsersIdField),
   ]),
   userController.deletePernamentMultiUsers
 );
