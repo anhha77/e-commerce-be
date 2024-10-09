@@ -446,7 +446,6 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  * @route GET /products
  * @description Get the products
  * @query {name, color, size, sortByPrice}
- * @access Login required
  */
 ```
 
@@ -467,7 +466,6 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 /**
  * @route GET /products/:productId
  * @description Get the product detail
- * @access Login required
  */
 ```
 
@@ -506,7 +504,6 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 /**
  * @route GET /products/silbling/:productId
  * @description Get the silbling of product variation master
- * @access Login required
  */
 ```
 
