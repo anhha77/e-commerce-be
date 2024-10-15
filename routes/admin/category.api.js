@@ -4,6 +4,7 @@ const categoryController = require("../../controllers/admin/category.controller"
 const authentication = require("../../middlewares/authentication");
 const validators = require("../../middlewares/validators");
 const { body } = require("express-validator");
+const { CategoryType } = require("../../helpers/constant");
 
 /**
  * @route GET /category
@@ -23,8 +24,17 @@ router.post(
   authentication.loginRequired,
   (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
   validators.validate([
-    body("parentCategoryId").exists().custom(validators.checkObjectIdList),
+    body("parentCategoryId").optional().custom(validators.checkObjectId),
     body("categoryName").exists().isString().notEmpty(),
+    body("type")
+      .exists()
+      .isString()
+      .notEmpty()
+      .isIn(
+        CategoryType.GenderCategory,
+        CategoryType.GeneralCategory,
+        CategoryType.SubCategory
+      ),
   ])
 );
 

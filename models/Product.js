@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const productSchema = Schema(
   {
-    category: [{ type: Schema.ObjectId, required: true, ref: "Category" }],
+    category: { type: Schema.ObjectId, required: true, ref: "Category" },
     name: { type: String, required: true },
     description: { type: String, required: true },
     productVariationMasterId: [
