@@ -7,12 +7,6 @@ const { body } = require("express-validator");
 const { CategoryType } = require("../../helpers/constant");
 
 /**
- * @route GET /category
- * @description Get all the category of e-commerce shop
- * @access Login required
- */
-
-/**
  * @route POST admin/category
  * @description Create a category name
  * @body {parentCategoryId, categoryName}
@@ -35,7 +29,8 @@ router.post(
         CategoryType.GeneralCategory,
         CategoryType.SubCategory
       ),
-  ])
+  ]),
+  categoryController.createCategory
 );
 
 module.exports = router;
