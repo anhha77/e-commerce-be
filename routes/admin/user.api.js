@@ -27,7 +27,7 @@ router.post(
       .optional()
       .notEmpty()
       .isNumeric(),
-    body("role", "Invalid role").exists().notEmpty().isIn("user", "admin"),
+    body("role", "Invalid role").exists().notEmpty().isIn(["user", "admin"]),
     body("address").optional().custom(validators.checkAddressField),
   ]),
   userController.createUser

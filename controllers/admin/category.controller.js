@@ -137,18 +137,17 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
     const isCategoryExist = await Category.find({
       parentCategoryId,
       categoryName,
-      type,
     });
     if (isCategoryExist) {
       throw new AppError(
         400,
-        "This category name has been taken",
+        "This category name has exist",
         "Update Category Error"
       );
     }
   }
 
-  fields = ["parentCategoryId", "categoryName", "type"];
+  fields = ["parentCategoryId", "categoryName"];
   fields.forEach((field) => {
     if (req.body[field] !== undefined) {
       category[field] = req.body[field];

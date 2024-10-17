@@ -24,11 +24,11 @@ router.post(
       .exists()
       .isString()
       .notEmpty()
-      .isIn(
+      .isIn([
         CategoryType.GenderCategory,
         CategoryType.GeneralCategory,
-        CategoryType.SubCategory
-      ),
+        CategoryType.SubCategory,
+      ]),
   ]),
   categoryController.createCategory
 );
@@ -48,7 +48,8 @@ router.put(
     param("categoryId").exists().isString().custom(validators.checkObjectId),
     body("parentCategoryId").optional().custom(validators.checkObjectId),
     body("categoryName").optional().notEmpty().isString(),
-  ])
+  ]),
+  categoryController.updateCategory
 );
 
 module.exports = router;
