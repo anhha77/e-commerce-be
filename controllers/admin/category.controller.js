@@ -92,9 +92,79 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
     throw new AppError(400, "Cannot find category", "Update Category Error");
   }
 
-  if (categoryName) {
-    const checkValid = await Category.findOne({ categoryName });
+  if (category.type === CategoryType.GenderCategory && parentCategoryId) {
+    throw new AppError(
+      400,
+      "Cannot assign parent category to this category",
+      "Update Catgory Error"
+    );
   }
+
+  if (parentCategoryId) {
+    const parentCategory = await Category.findById(parentCategoryId);
+    if (!parentCategory) {
+      throw new AppError(
+        400,
+        "Cannot find parent category",
+        "Update Category Error"
+      );
+    }
+
+    if (
+      category.type === CategoryType.GeneralCategory &&
+      parentCategory.type !== CategoryType.GenderCategory
+    ) {
+      throw new AppError(
+        400,
+        "Cannot assign to this category",
+        "Update Category Error"
+      );
+    }
+
+    if (
+      category.type === CategoryType.SubCategory &&
+      parentCategory.type !== CategoryType.GeneralCategory
+    ) {
+      throw new AppError(
+        400,
+        "Cannot assign to this category",
+        "Update Category Error"
+      );
+    }
+  }
+
+  if (categoryName) {
+    const isCategoryExist = await Category.find({
+      parentCategoryId,
+      categoryName,
+      type,
+    });
+    if (isCategoryExist) {
+      throw new AppError(
+        400,
+        "This category name has been taken",
+        "Update Category Error"
+      );
+    }
+  }
+
+  fields = ["parentCategoryId", "categoryName", "type"];
+  fields.forEach((field) => {
+    if (req.body[field] !== undefined) {
+      category[field] = req.body[field];
+    }
+  });
+
+  await category.save();
+
+  return sendResponse(
+    res,
+    200,
+    true,
+    category,
+    null,
+    "Update Category Successfully"
+  );
 });
 
 module.exports = categoryController;
