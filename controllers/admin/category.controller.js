@@ -30,7 +30,7 @@ categoryController.createCategory = catchAsync(async (req, res, next) => {
   if (req.body["parentCategoryId"]) {
     if (type === CategoryType.GeneralCategory) {
       const checkType = await Category.findById(parentCategoryId, { type: 1 });
-      if (checkType.type !== CategoryType.GenderCategory) {
+      if (!checkType || checkType.type !== CategoryType.GenderCategory) {
         throw new AppError(
           400,
           "Cannot assign to this category",
@@ -41,7 +41,7 @@ categoryController.createCategory = catchAsync(async (req, res, next) => {
 
     if (type === CategoryType.SubCategory) {
       const checkType = await Category.findById(parentCategoryId, { type: 1 });
-      if (checkType.type !== CategoryType.GeneralCategory) {
+      if (!checkType || checkType.type !== CategoryType.GeneralCategory) {
         throw new AppError(
           400,
           "Cannot assign to this category",
@@ -49,19 +49,19 @@ categoryController.createCategory = catchAsync(async (req, res, next) => {
         );
       }
     }
+  }
 
-    let check = await Category.findOne({
-      parentCategoryId,
-      categoryName,
-      type,
-    });
-    if (check) {
-      throw new AppError(
-        400,
-        "This category already assign to this parent category",
-        "Create Category Error"
-      );
-    }
+  let check = await Category.findOne({
+    parentCategoryId,
+    categoryName,
+    type,
+  });
+  if (check) {
+    throw new AppError(
+      400,
+      "This category already assign to this parent category",
+      "Create Category Error"
+    );
   }
 
   const fields = ["parentCategoryId", "categoryName", "type"];
@@ -134,9 +134,21 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
   }
 
   if (categoryName) {
-    const isCategoryExist = await Category.find({
+    const isCategoryExist = await Category.findOne({
       parentCategoryId,
       categoryName,
+    });
+    if (isCategoryExist) {
+      throw new AppError(
+        400,
+        "This category name has exist",
+        "Update Category Error"
+      );
+    }
+  } else {
+    const isCategoryExist = await Category.findOne({
+      parentCategoryId,
+      categoryName: category.categoryName,
     });
     if (isCategoryExist) {
       throw new AppError(
