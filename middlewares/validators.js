@@ -1,6 +1,5 @@
 const { sendResponse, AppError } = require("../helpers/utils");
 const { validationResult } = require("express-validator");
-const { body } = require("express-validator");
 const mongoose = require("mongoose");
 
 const validators = {};

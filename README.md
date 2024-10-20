@@ -378,8 +378,8 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 ```javascript
 /**
  * @route GET /category
- * @description Get all the category of e-commerce shop
- * @access Login required
+ * @description Get categories of e-commerce shop
+ * @access Public
  */
 ```
 
