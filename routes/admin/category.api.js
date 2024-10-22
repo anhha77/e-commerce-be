@@ -20,6 +20,7 @@ router.post(
   validators.validate([
     body("parentCategoryId").optional().custom(validators.checkObjectId),
     body("categoryName").exists().isString().notEmpty(),
+    body("imageUrl").optional().exists().isString().notEmpty(),
     body("type")
       .exists()
       .isString()
@@ -47,6 +48,7 @@ router.put(
   validators.validate([
     param("categoryId").exists().isString().custom(validators.checkObjectId),
     body("parentCategoryId").optional().custom(validators.checkObjectId),
+    body("imageUrl").optional().exists().isString().notEmpty(),
     body("categoryName").optional().notEmpty().isString(),
   ]),
   categoryController.updateCategory

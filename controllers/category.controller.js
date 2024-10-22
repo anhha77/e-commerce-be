@@ -18,7 +18,7 @@ categoryController.getCategories = catchAsync(async (req, res, next) => {
   } = req.query;
 
   page = parseInt(page) || 0;
-  limit = parseInt(limit) || 100;
+  limit = parseInt(limit) || 10;
 
   const query = [];
 
@@ -72,6 +72,36 @@ categoryController.getCategories = catchAsync(async (req, res, next) => {
     { categories, count, totalPages },
     null,
     "Get categories sucessfully"
+  );
+});
+
+categoryController.getSingleCategory = catchAsync(async (req, res, next) => {
+  const { categoryId } = req.params;
+
+  const category = await Category.findById(categoryId).populate({
+    path: "parentCategoryId",
+    model: "Category",
+    populate: [
+      {
+        path: "parentCategoryId",
+        model: "Category",
+      },
+    ],
+  });
+
+  if (!category) {
+    throw new AppError(400, "Cannot find category", "Get Category Error");
+  }
+
+  const childCategories = await Category.find({ parentCategoryId: categoryId });
+
+  return sendResponse(
+    res,
+    200,
+    true,
+    { category, childCategories },
+    null,
+    "Get Category Successfully"
   );
 });
 

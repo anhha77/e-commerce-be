@@ -383,13 +383,13 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
  */
 ```
 
-<!-- ```javascript
+```javascript
 /**
- * @route GET admin/category
- * @description Get all the category of e-commerce shop
- * @access Login required (Admin)
+ * @route GET /category/:categoryId
+ * @description Get specific category and it child (if it has)
+ * @access Public
  */
-``` -->
+```
 
 ```javascript
 /**

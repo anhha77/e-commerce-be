@@ -64,7 +64,7 @@ categoryController.createCategory = catchAsync(async (req, res, next) => {
     );
   }
 
-  const fields = ["parentCategoryId", "categoryName", "type"];
+  const fields = ["parentCategoryId", "categoryName", "type", "imageUrl"];
   fields.forEach((field) => {
     if (req.body[field] !== undefined) {
       data[field] = req.body[field];
@@ -159,7 +159,7 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
     }
   }
 
-  fields = ["parentCategoryId", "categoryName"];
+  fields = ["parentCategoryId", "categoryName", "imageUrl"];
   fields.forEach((field) => {
     if (req.body[field] !== undefined) {
       category[field] = req.body[field];

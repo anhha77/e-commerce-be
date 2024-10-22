@@ -14,6 +14,7 @@ const categorySchema = Schema({
       CategoryType.SubCategory,
     ],
   },
+  avatarUrl: { type: String, required: false },
   isDeleted: { type: Boolean, default: false },
 });
 
