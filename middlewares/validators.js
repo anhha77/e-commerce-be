@@ -42,6 +42,15 @@ validators.checkObjectIdList = (objectIdList) => {
   return true;
 };
 
+validators.checkCategoriesChild = (categories) => {
+  categories.forEach((category) => {
+    if (!category.categoryName) {
+      throw new Error("Invalid catgory name");
+    }
+  });
+  return true;
+};
+
 validators.checkAddressField = (value) => {
   value.forEach((address) => {
     if (!address.addressLocation || address.addressLocation.length === 0) {

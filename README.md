@@ -393,7 +393,7 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route POST admin/category
+ * @route POST /admin/category
  * @description Create a category name
  * @body {parentCategoryId, categoryName}
  * @access Login required (Admin)
@@ -402,9 +402,17 @@ E-commerce clothes store web also provides shop owners with an intuitive interfa
 
 ```javascript
 /**
- * @route PUT admin/category/:categoryId
+ * @route PUT /admin/category/:categoryId
  * @description Update a category
  * @body {parentCategoryId, categoryName}
+ * @access Login required (Admin)
+ */
+```
+
+```javascript
+/**
+ * @route DELETE /admin/category/:categoryId
+ * @description Delete a category
  * @access Login required (Admin)
  */
 ```

@@ -1,38 +1,17 @@
 const { AppError, sendResponse, catchAsync } = require("../helpers/utils");
 const Category = require("../models/Category");
-const { CategoryType } = require("../helpers/constant");
 const { populate } = require("dotenv");
 const { model } = require("mongoose");
 
 const categoryController = {};
 
 categoryController.getCategories = catchAsync(async (req, res, next) => {
-  let {
-    categoryName,
-    isDeleted,
-    genderSearch,
-    generalSearch,
-    subSearch,
-    page,
-    limit,
-  } = req.query;
+  let { categoryName, isDeleted, page, limit } = req.query;
 
   page = parseInt(page) || 0;
   limit = parseInt(limit) || 10;
 
   const query = [];
-
-  if (genderSearch === "true") {
-    query.push({ type: CategoryType.GenderCategory });
-  }
-
-  if (generalSearch === "true") {
-    query.push({ type: CategoryType.GeneralCategory });
-  }
-
-  if (subSearch === "true") {
-    query.push({ type: CategoryType.SubCategory });
-  }
 
   if (categoryName) {
     query.push({ categoryName: { $regex: categoryName, $options: "i" } });

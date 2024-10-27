@@ -9,7 +9,7 @@ const { query, param } = require("express-validator");
 /**
  * @route GET /category
  * @description Get categories of e-commerce shop
- * @query {categoryName, isDeleted, genderSearch, generalSearch, subSearch, page, limit}
+ * @query {categoryName, isDeleted, page, limit}
  * @access Public
  */
 
@@ -24,17 +24,6 @@ router.get(
       .isString()
       .notEmpty()
       .isIn(["true", "false"]),
-    query("genderSearch")
-      .exists()
-      .isString()
-      .notEmpty()
-      .isIn(["true", "false"]),
-    query("generalSearch")
-      .exists()
-      .isString()
-      .notEmpty()
-      .isIn(["true", "false"]),
-    query("subSearch").exists().isString().notEmpty().isIn(["true", "false"]),
   ]),
   categoryController.getCategories
 );

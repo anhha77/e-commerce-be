@@ -4,7 +4,6 @@ const categoryController = require("../../controllers/admin/category.controller"
 const authentication = require("../../middlewares/authentication");
 const validators = require("../../middlewares/validators");
 const { body, param } = require("express-validator");
-const { CategoryType } = require("../../helpers/constant");
 
 /**
  * @route POST admin/category
@@ -21,15 +20,7 @@ router.post(
     body("parentCategoryId").optional().custom(validators.checkObjectId),
     body("categoryName").exists().isString().notEmpty(),
     body("imageUrl").optional().exists().isString().notEmpty(),
-    body("type")
-      .exists()
-      .isString()
-      .notEmpty()
-      .isIn([
-        CategoryType.GenderCategory,
-        CategoryType.GeneralCategory,
-        CategoryType.SubCategory,
-      ]),
+    body("childCategories").optional().custom(validators.checkCategoriesChild),
   ]),
   categoryController.createCategory
 );
@@ -49,7 +40,8 @@ router.put(
     param("categoryId").exists().isString().custom(validators.checkObjectId),
     body("parentCategoryId").optional().custom(validators.checkObjectId),
     body("imageUrl").optional().exists().isString().notEmpty(),
-    body("categoryName").optional().notEmpty().isString(),
+    body("categoryName").exists().isString().notEmpty(),
+    body("childCategories").optional().custom(validators.checkCategoriesChild),
   ]),
   categoryController.updateCategory
 );

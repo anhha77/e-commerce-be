@@ -1,70 +1,27 @@
 const { AppError, sendResponse, catchAsync } = require("../../helpers/utils");
 const Category = require("../../models/Category");
-const { CategoryType } = require("../../helpers/constant");
 
 const categoryController = {};
 
 categoryController.createCategory = catchAsync(async (req, res, next) => {
-  let { parentCategoryId, categoryName, type } = req.body;
+  let { parentCategoryId, categoryName, childCategories } = req.body;
+
   const data = {};
-
-  if (type === CategoryType.GenderCategory) {
-    if (parentCategoryId) {
-      throw new AppError(
-        400,
-        "Gender Category cannot have parent category",
-        "Create Category Error"
-      );
-    }
-
-    const check = await Category.findOne({ categoryName });
-    if (check) {
-      throw new AppError(
-        400,
-        "Gender Category cannot have multi categories with the same name",
-        "Create Category Error"
-      );
-    }
-  }
-
-  if (req.body["parentCategoryId"]) {
-    if (type === CategoryType.GeneralCategory) {
-      const checkType = await Category.findById(parentCategoryId, { type: 1 });
-      if (!checkType || checkType.type !== CategoryType.GenderCategory) {
-        throw new AppError(
-          400,
-          "Cannot assign to this category",
-          "Create Category Error"
-        );
-      }
-    }
-
-    if (type === CategoryType.SubCategory) {
-      const checkType = await Category.findById(parentCategoryId, { type: 1 });
-      if (!checkType || checkType.type !== CategoryType.GeneralCategory) {
-        throw new AppError(
-          400,
-          "Cannot assign to this category",
-          "Create Category Error"
-        );
-      }
-    }
-  }
+  const childData = [];
 
   let check = await Category.findOne({
     parentCategoryId,
     categoryName,
-    type,
   });
   if (check) {
     throw new AppError(
       400,
-      "This category already assign to this parent category",
+      "This category already exist",
       "Create Category Error"
     );
   }
 
-  const fields = ["parentCategoryId", "categoryName", "type", "imageUrl"];
+  const fields = ["parentCategoryId", "categoryName", "imageUrl"];
   fields.forEach((field) => {
     if (req.body[field] !== undefined) {
       data[field] = req.body[field];
@@ -73,11 +30,25 @@ categoryController.createCategory = catchAsync(async (req, res, next) => {
 
   const category = await Category.create(data);
 
+  const childFields = ["categoryName", "imageUrl"];
+  childCategories.forEach((item) => {
+    const itemData = {};
+    childFields.forEach((field) => {
+      if (item[field] !== undefined) {
+        itemData[field] = item[field];
+      }
+    });
+    itemData.parentCategoryId = category._id;
+    childData.push(itemData);
+  });
+
+  childCategories = await Category.insertMany(childData);
+
   return sendResponse(
     res,
     200,
     true,
-    category,
+    { category, childCategories },
     null,
     "Create Category Successfully"
   );
@@ -85,19 +56,11 @@ categoryController.createCategory = catchAsync(async (req, res, next) => {
 
 categoryController.updateCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
-  const { parentCategoryId, categoryName } = req.body;
+  let { parentCategoryId, categoryName, childCategories } = req.body;
 
   const category = await Category.findById(categoryId);
   if (!category) {
     throw new AppError(400, "Cannot find category", "Update Category Error");
-  }
-
-  if (category.type === CategoryType.GenderCategory && parentCategoryId) {
-    throw new AppError(
-      400,
-      "Cannot assign parent category to this category",
-      "Update Catgory Error"
-    );
   }
 
   if (parentCategoryId) {
@@ -109,46 +72,15 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
         "Update Category Error"
       );
     }
-
-    if (
-      category.type === CategoryType.GeneralCategory &&
-      parentCategory.type !== CategoryType.GenderCategory
-    ) {
-      throw new AppError(
-        400,
-        "Cannot assign to this category",
-        "Update Category Error"
-      );
-    }
-
-    if (
-      category.type === CategoryType.SubCategory &&
-      parentCategory.type !== CategoryType.GeneralCategory
-    ) {
-      throw new AppError(
-        400,
-        "Cannot assign to this category",
-        "Update Category Error"
-      );
-    }
   }
 
-  if (categoryName) {
+  if (
+    parentCategoryId !== category.parentCategoryId ||
+    categoryName !== category.categoryName
+  ) {
     const isCategoryExist = await Category.findOne({
       parentCategoryId,
       categoryName,
-    });
-    if (isCategoryExist) {
-      throw new AppError(
-        400,
-        "This category name has exist",
-        "Update Category Error"
-      );
-    }
-  } else {
-    const isCategoryExist = await Category.findOne({
-      parentCategoryId,
-      categoryName: category.categoryName,
     });
     if (isCategoryExist) {
       throw new AppError(
@@ -168,11 +100,41 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
 
   await category.save();
 
+  if (childCategories) {
+    const query = childCategories.map((item) => ({
+      categoryName: item.categoryName,
+    }));
+
+    const isExist = await Category.find({ $or: query });
+    if (isExist.length) {
+      throw new AppError(
+        400,
+        " This category already exist",
+        "Update Category Error"
+      );
+    }
+
+    const childFields = ["categoryName", "imageUrl"];
+    const childData = [];
+    childCategories.forEach((item) => {
+      const itemData = {};
+      childFields.forEach((field) => {
+        if (item[field] !== undefined) {
+          itemData[field] = item[field];
+        }
+      });
+      itemData.parentCategoryId = category._id;
+      childData.push(itemData);
+    });
+
+    childCategories = await Category.insertMany(childData);
+  }
+
   return sendResponse(
     res,
     200,
     true,
-    category,
+    { category, childCategories },
     null,
     "Update Category Successfully"
   );
