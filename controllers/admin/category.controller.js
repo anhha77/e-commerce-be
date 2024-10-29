@@ -75,7 +75,7 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
   }
 
   if (
-    parentCategoryId !== category.parentCategoryId ||
+    parentCategoryId !== category.parentCategoryId.toString() ||
     categoryName !== category.categoryName
   ) {
     const isCategoryExist = await Category.findOne({
@@ -137,6 +137,26 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
     { category, childCategories },
     null,
     "Update Category Successfully"
+  );
+});
+
+categoryController.deleteCategory = catchAsync(async (req, res, next) => {
+  const { categoryId } = req.params;
+
+  let category = await Category.findById(categoryId);
+  if (!category) {
+    throw new AppError(400, "Cannot find category", "Delete Category Error");
+  }
+
+  category = await Category.deleteOne({ _id: categoryId });
+
+  return sendResponse(
+    res,
+    200,
+    true,
+    { category },
+    null,
+    "Delete Category Successfully"
   );
 });
 

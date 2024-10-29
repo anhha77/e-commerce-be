@@ -46,4 +46,20 @@ router.put(
   categoryController.updateCategory
 );
 
+/**
+ * @route DELETE /admin/category/:categoryId
+ * @description Delete a category
+ * @access Login required (Admin)
+ */
+
+router.delete(
+  "/:categoryId",
+  authentication.loginRequired,
+  (req, res, next) => authentication.validateRole(req, res, next, ["admin"]),
+  validators.validate([
+    param("categoryId").exists().isString().custom(validators.checkObjectId),
+  ]),
+  categoryController.deleteCategory
+);
+
 module.exports = router;

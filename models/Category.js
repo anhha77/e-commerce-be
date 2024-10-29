@@ -8,5 +8,32 @@ const categorySchema = Schema({
   isDeleted: { type: Boolean, default: false },
 });
 
+categorySchema.pre("find", function (next) {
+  try {
+    this.populate("parentCategoryId");
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+categorySchema.pre("findOne", function (next) {
+  try {
+    this.populate("parentCategoryId");
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+categorySchema.pre("deleteOne", async function (next) {
+  try {
+    await Category.deleteMany({ parentCategoryId: this._id });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 const Category = mongoose.model("Category", categorySchema, "Categories");
 module.exports = Category;
