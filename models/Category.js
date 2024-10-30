@@ -29,9 +29,12 @@ categorySchema.pre("findOne", function (next) {
 
 categorySchema.pre("updateOne", async function (next) {
   try {
+    // console.log("this is", this.getFilter());
     const doc = await this.model.findOne(this.getFilter());
-    console.log("this is", doc);
-    await Category.updateOne({ _id: doc._id }, { isDeleted: true });
+    // console.log(doc);
+    const child = await this.model.find({ parentCategoryId: doc._id });
+    console.log(child);
+    // await Category.updateOne({ _id: doc._id }, { isDeleted: true });
     next();
   } catch (error) {
     next(error);
