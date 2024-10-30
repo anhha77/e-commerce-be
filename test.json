@@ -3,18 +3,6 @@
   "data": {
     "categories": [
       {
-        "_id": "670fd87d141855911236b2d0",
-        "categoryName": "Boys",
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "670fd8f0141855911236b2d4",
-        "categoryName": "Girls",
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
         "_id": "67112e3213c094039e3f478b",
         "categoryName": "Topwear",
         "isDeleted": false,
@@ -759,7 +747,19 @@
         "__v": 0
       },
       {
-        "_id": "672100536e4b54cb6aa337cd",
+        "_id": "670fd87d141855911236b2d0",
+        "categoryName": "Boys",
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "670fd8f0141855911236b2d4",
+        "categoryName": "Girls",
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "67224da81f3ffc4de59cdd74",
         "categoryName": "a",
         "parentCategoryId": {
           "_id": "670fd87d141855911236b2d0",
@@ -771,28 +771,10 @@
         "__v": 0
       },
       {
-        "_id": "672100536e4b54cb6aa337cf",
-        "categoryName": "a1",
-        "parentCategoryId": {
-          "_id": "672100536e4b54cb6aa337cd",
-          "categoryName": "a",
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          },
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "672100536e4b54cb6aa337d0",
+        "_id": "67224da81f3ffc4de59cdd77",
         "categoryName": "a2",
         "parentCategoryId": {
-          "_id": "672100536e4b54cb6aa337cd",
+          "_id": "67224da81f3ffc4de59cdd74",
           "categoryName": "a",
           "parentCategoryId": {
             "_id": "670fd87d141855911236b2d0",
@@ -807,10 +789,10 @@
         "__v": 0
       },
       {
-        "_id": "67210332e7510de8a2ef054b",
+        "_id": "67224da81f3ffc4de59cdd78",
         "categoryName": "a3",
         "parentCategoryId": {
-          "_id": "672100536e4b54cb6aa337cd",
+          "_id": "67224da81f3ffc4de59cdd74",
           "categoryName": "a",
           "parentCategoryId": {
             "_id": "670fd87d141855911236b2d0",
@@ -825,15 +807,68 @@
         "__v": 0
       },
       {
-        "_id": "6721037d10ca0ce38cab3523",
+        "_id": "67224da81f3ffc4de59cdd76",
+        "categoryName": "a1",
+        "parentCategoryId": {
+          "_id": "67224da81f3ffc4de59cdd74",
+          "categoryName": "a",
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          },
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "672253a95bd589c6d41d7d15",
         "categoryName": "b",
         "parentCategoryId": {
-          "_id": "67210332e7510de8a2ef054b",
+          "_id": "67224da81f3ffc4de59cdd78",
           "categoryName": "a3",
           "parentCategoryId": {
-            "_id": "672100536e4b54cb6aa337cd",
+            "_id": "67224da81f3ffc4de59cdd74",
             "categoryName": "a",
-            "parentCategoryId": "670fd87d141855911236b2d0",
+            "parentCategoryId": {
+              "_id": "670fd87d141855911236b2d0",
+              "categoryName": "Boys",
+              "isDeleted": false,
+              "__v": 0
+            },
+            "isDeleted": false,
+            "__v": 0
+          },
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "6722544e702471ed12cd5e77",
+        "categoryName": "b1",
+        "parentCategoryId": {
+          "_id": "672253a95bd589c6d41d7d15",
+          "categoryName": "b",
+          "parentCategoryId": {
+            "_id": "67224da81f3ffc4de59cdd78",
+            "categoryName": "a3",
+            "parentCategoryId": {
+              "_id": "67224da81f3ffc4de59cdd74",
+              "categoryName": "a",
+              "parentCategoryId": {
+                "_id": "670fd87d141855911236b2d0",
+                "categoryName": "Boys",
+                "isDeleted": false,
+                "__v": 0
+              },
+              "isDeleted": false,
+              "__v": 0
+            },
             "isDeleted": false,
             "__v": 0
           },
@@ -844,7 +879,7 @@
         "__v": 0
       }
     ],
-    "count": 52,
+    "count": 53,
     "totalPages": 1
   },
   "message": "Get categories sucessfully"

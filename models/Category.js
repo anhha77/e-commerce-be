@@ -1,3 +1,4 @@
+const { query } = require("express");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -26,9 +27,11 @@ categorySchema.pre("findOne", function (next) {
   }
 });
 
-categorySchema.pre("deleteOne", async function (next) {
+categorySchema.pre("updateOne", async function (next) {
   try {
-    await Category.deleteMany({ parentCategoryId: this._id });
+    const doc = await this.model.findOne(this.getFilter());
+    console.log("this is", doc);
+    await Category.updateOne({ _id: doc._id }, { isDeleted: true });
     next();
   } catch (error) {
     next(error);

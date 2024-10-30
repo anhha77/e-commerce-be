@@ -4,7 +4,7 @@ const Category = require("../models/Category");
 const categoryController = {};
 
 categoryController.getCategories = catchAsync(async (req, res, next) => {
-  let { categoryName, isDeleted, page, limit } = req.query;
+  let { categoryName, page, limit } = req.query;
 
   page = parseInt(page) || 0;
   limit = parseInt(limit) || 100;
@@ -13,10 +13,6 @@ categoryController.getCategories = catchAsync(async (req, res, next) => {
 
   if (categoryName) {
     query.push({ categoryName: { $regex: categoryName, $options: "i" } });
-  }
-
-  if (isDeleted === "true") {
-    query.push({ isDeleted: true });
   }
 
   const filterCriteria = query.length

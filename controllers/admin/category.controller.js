@@ -31,18 +31,21 @@ categoryController.createCategory = catchAsync(async (req, res, next) => {
   const category = await Category.create(data);
 
   const childFields = ["categoryName", "imageUrl"];
-  childCategories.forEach((item) => {
-    const itemData = {};
-    childFields.forEach((field) => {
-      if (item[field] !== undefined) {
-        itemData[field] = item[field];
-      }
-    });
-    itemData.parentCategoryId = category._id;
-    childData.push(itemData);
-  });
 
-  childCategories = await Category.insertMany(childData);
+  if (childCategories) {
+    childCategories.forEach((item) => {
+      const itemData = {};
+      childFields.forEach((field) => {
+        if (item[field] !== undefined) {
+          itemData[field] = item[field];
+        }
+      });
+      itemData.parentCategoryId = category._id;
+      childData.push(itemData);
+    });
+
+    childCategories = await Category.insertMany(childData);
+  }
 
   return sendResponse(
     res,
@@ -75,7 +78,7 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
   }
 
   if (
-    parentCategoryId !== category.parentCategoryId.toString() ||
+    parentCategoryId !== category.parentCategoryId._id.toString() ||
     categoryName !== category.categoryName
   ) {
     const isCategoryExist = await Category.findOne({
@@ -143,12 +146,15 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
 categoryController.deleteCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
 
-  let category = await Category.findById(categoryId);
+  let category = await Category.updateOne(
+    { _id: categoryId },
+    { isDeleted: true }
+  );
   if (!category) {
     throw new AppError(400, "Cannot find category", "Delete Category Error");
   }
 
-  category = await Category.deleteOne({ _id: categoryId });
+  // category = await Category.deleteOne({ _id: categoryId });
 
   return sendResponse(
     res,

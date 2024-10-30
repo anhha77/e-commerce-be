@@ -18,12 +18,6 @@ router.get(
   authentication.loginRequired,
   validators.validate([
     query("categoryName").optional().exists().notEmpty().isString(),
-    query("isDeleted")
-      .optional()
-      .exists()
-      .isString()
-      .notEmpty()
-      .isIn(["true", "false"]),
   ]),
   categoryController.getCategories
 );
