@@ -106,6 +106,7 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
   if (childCategories) {
     const query = childCategories.map((item) => ({
       categoryName: item.categoryName,
+      parentCategoryId: categoryId,
     }));
 
     const isExist = await Category.find({ $or: query });
