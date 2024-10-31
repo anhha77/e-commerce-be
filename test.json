@@ -771,6 +771,24 @@
         "__v": 0
       },
       {
+        "_id": "67224da81f3ffc4de59cdd76",
+        "categoryName": "a1",
+        "parentCategoryId": {
+          "_id": "67224da81f3ffc4de59cdd74",
+          "categoryName": "a",
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          },
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
         "_id": "67224da81f3ffc4de59cdd77",
         "categoryName": "a2",
         "parentCategoryId": {
@@ -803,49 +821,7 @@
           "isDeleted": false,
           "__v": 0
         },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "67224da81f3ffc4de59cdd76",
-        "categoryName": "a1",
-        "parentCategoryId": {
-          "_id": "67224da81f3ffc4de59cdd74",
-          "categoryName": "a",
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          },
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "672253a95bd589c6d41d7d15",
-        "categoryName": "b",
-        "parentCategoryId": {
-          "_id": "67224da81f3ffc4de59cdd78",
-          "categoryName": "a3",
-          "parentCategoryId": {
-            "_id": "67224da81f3ffc4de59cdd74",
-            "categoryName": "a",
-            "parentCategoryId": {
-              "_id": "670fd87d141855911236b2d0",
-              "categoryName": "Boys",
-              "isDeleted": false,
-              "__v": 0
-            },
-            "isDeleted": false,
-            "__v": 0
-          },
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
+        "isDeleted": true,
         "__v": 0
       },
       {
@@ -869,17 +845,71 @@
               "isDeleted": false,
               "__v": 0
             },
+            "isDeleted": true,
+            "__v": 0
+          },
+          "isDeleted": true,
+          "__v": 0
+        },
+        "isDeleted": true,
+        "__v": 0
+      },
+      {
+        "_id": "672253a95bd589c6d41d7d15",
+        "categoryName": "b",
+        "parentCategoryId": {
+          "_id": "67224da81f3ffc4de59cdd78",
+          "categoryName": "a3",
+          "parentCategoryId": {
+            "_id": "67224da81f3ffc4de59cdd74",
+            "categoryName": "a",
+            "parentCategoryId": {
+              "_id": "670fd87d141855911236b2d0",
+              "categoryName": "Boys",
+              "isDeleted": false,
+              "__v": 0
+            },
             "isDeleted": false,
             "__v": 0
           },
-          "isDeleted": false,
+          "isDeleted": true,
+          "__v": 0
+        },
+        "isDeleted": true,
+        "__v": 0
+      },
+      {
+        "_id": "672396bb19b76bb23dd28762",
+        "categoryName": "b2",
+        "parentCategoryId": {
+          "_id": "672253a95bd589c6d41d7d15",
+          "categoryName": "b",
+          "parentCategoryId": {
+            "_id": "67224da81f3ffc4de59cdd78",
+            "categoryName": "a3",
+            "parentCategoryId": {
+              "_id": "67224da81f3ffc4de59cdd74",
+              "categoryName": "a",
+              "parentCategoryId": {
+                "_id": "670fd87d141855911236b2d0",
+                "categoryName": "Boys",
+                "isDeleted": false,
+                "__v": 0
+              },
+              "isDeleted": false,
+              "__v": 0
+            },
+            "isDeleted": true,
+            "__v": 0
+          },
+          "isDeleted": true,
           "__v": 0
         },
         "isDeleted": false,
         "__v": 0
       }
     ],
-    "count": 53,
+    "count": 54,
     "totalPages": 1
   },
   "message": "Get categories sucessfully"

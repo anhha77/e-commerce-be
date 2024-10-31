@@ -32,9 +32,11 @@ categorySchema.pre("updateOne", async function (next) {
     // console.log("this is", this.getFilter());
     const doc = await this.model.findOne(this.getFilter());
     // console.log(doc);
-    const child = await this.model.find({ parentCategoryId: doc._id });
-    console.log(child);
-    // await Category.updateOne({ _id: doc._id }, { isDeleted: true });
+    const isExist = await this.model.findOne({ parentCategoryId: doc._id });
+    // console.log(isExist);
+    if (isExist) {
+      await Category.updateOne({ _id: isExist._id }, { isDeleted: true });
+    }
     next();
   } catch (error) {
     next(error);

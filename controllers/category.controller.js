@@ -16,8 +16,8 @@ categoryController.getCategories = catchAsync(async (req, res, next) => {
   }
 
   const filterCriteria = query.length
-    ? { $or: [...query] }
-    : { isDeleted: false };
+    ? { $or: [...query, { isDeleted: false }] }
+    : {};
 
   const count = await Category.countDocuments(filterCriteria);
   const totalPages = Math.ceil(count / limit);

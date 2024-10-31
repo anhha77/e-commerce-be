@@ -39,7 +39,7 @@ router.put(
   validators.validate([
     param("categoryId").exists().isString().custom(validators.checkObjectId),
     body("parentCategoryId").optional().custom(validators.checkObjectId),
-    body("imageUrl").optional().exists().isString().notEmpty(),
+    body("imageUrl").optional().isString().notEmpty(),
     body("categoryName").exists().isString().notEmpty(),
     body("childCategories").optional().custom(validators.checkCategoriesChild),
   ]),
