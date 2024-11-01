@@ -31,11 +31,16 @@ categorySchema.pre("updateOne", async function (next) {
   try {
     // console.log("this is", this.getFilter());
     const doc = await this.model.findOne(this.getFilter());
-    // console.log(doc);
-    const isExist = await this.model.findOne({ parentCategoryId: doc._id });
-    // console.log(isExist);
-    if (isExist) {
-      await Category.updateOne({ _id: isExist._id }, { isDeleted: true });
+    // console.log("this is parent", doc);
+    const childCategories = await this.model.find({
+      parentCategoryId: doc._id,
+      isDeleted: false,
+    });
+    // console.log("this is child", isExist);
+    if (childCategories.length > 0) {
+      for (const item of childCategories) {
+        await Category.updateOne({ _id: item._id }, { isDeleted: true });
+      }
     }
     next();
   } catch (error) {
