@@ -4,10 +4,12 @@ const Category = require("../models/Category");
 const categoryController = {};
 
 categoryController.getCategories = catchAsync(async (req, res, next) => {
-  let { categoryName, page, limit } = req.query;
+  let { categoryName, page, limit, sortDirection } = req.query;
 
   page = parseInt(page) || 0;
   limit = parseInt(limit) || 100;
+
+  sortDirection = parseInt(sortDirection) || 1;
 
   const query = [];
 
@@ -17,7 +19,7 @@ categoryController.getCategories = catchAsync(async (req, res, next) => {
 
   const filterCriteria = query.length
     ? { $or: [...query, { isDeleted: false }] }
-    : {};
+    : { isDeleted: false };
 
   const count = await Category.countDocuments(filterCriteria);
   const totalPages = Math.ceil(count / limit);
@@ -25,6 +27,7 @@ categoryController.getCategories = catchAsync(async (req, res, next) => {
   const offset = limit * page;
 
   const categories = await Category.find(filterCriteria)
+    .sort(sortDirection)
     .skip(offset)
     .limit(limit);
 
@@ -41,7 +44,10 @@ categoryController.getCategories = catchAsync(async (req, res, next) => {
 categoryController.getSingleCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
 
-  const category = await Category.findOne({ _id: categoryId });
+  const category = await Category.findOne({
+    _id: categoryId,
+    isDeleted: false,
+  });
 
   if (!category) {
     throw new AppError(400, "Cannot find category", "Get Category Error");
