@@ -27,7 +27,7 @@ categoryController.getCategories = catchAsync(async (req, res, next) => {
   const offset = limit * page;
 
   const categories = await Category.find(filterCriteria)
-    .sort(sortDirection)
+    .sort({ categoryName: sortDirection })
     .skip(offset)
     .limit(limit);
 
