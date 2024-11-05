@@ -131,8 +131,10 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
       childData.push(itemData);
     });
 
-    childCategories = await Category.insertMany(childData);
+    await Category.insertMany(childData);
   }
+
+  childCategories = await Category.find({ parentCategoryId: categoryId });
 
   return sendResponse(
     res,
