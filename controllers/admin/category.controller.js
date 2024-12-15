@@ -59,42 +59,41 @@ categoryController.createCategory = catchAsync(async (req, res, next) => {
 
 categoryController.updateCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
-  let { parentCategoryId, categoryName, childCategories } = req.body;
 
   const category = await Category.findById(categoryId);
   if (!category) {
     throw new AppError(400, "Cannot find category", "Update Category Error");
   }
 
-  if (parentCategoryId) {
-    const parentCategory = await Category.findById(parentCategoryId);
-    if (!parentCategory) {
-      throw new AppError(
-        400,
-        "Cannot find parent category",
-        "Update Category Error"
-      );
-    }
-  }
+  // if (parentCategoryId) {
+  //   const parentCategory = await Category.findById(parentCategoryId);
+  //   if (!parentCategory) {
+  //     throw new AppError(
+  //       400,
+  //       "Cannot find parent category",
+  //       "Update Category Error"
+  //     );
+  //   }
+  // }
 
-  if (
-    parentCategoryId !== category.parentCategoryId._id.toString() ||
-    categoryName !== category.categoryName
-  ) {
-    const isCategoryExist = await Category.findOne({
-      parentCategoryId,
-      categoryName,
-    });
-    if (isCategoryExist) {
-      throw new AppError(
-        400,
-        "This category name has exist",
-        "Update Category Error"
-      );
-    }
-  }
+  // if (
+  //   parentCategoryId !== category.parentCategoryId._id.toString() ||
+  //   categoryName !== category.categoryName
+  // ) {
+  //   const isCategoryExist = await Category.findOne({
+  //     parentCategoryId,
+  //     categoryName,
+  //   });
+  //   if (isCategoryExist) {
+  //     throw new AppError(
+  //       400,
+  //       "This category name has exist",
+  //       "Update Category Error"
+  //     );
+  //   }
+  // }
 
-  fields = ["parentCategoryId", "categoryName", "imageUrl"];
+  fields = ["categoryName", "imageUrl"];
   fields.forEach((field) => {
     if (req.body[field] !== undefined) {
       category[field] = req.body[field];
@@ -103,38 +102,38 @@ categoryController.updateCategory = catchAsync(async (req, res, next) => {
 
   await category.save();
 
-  if (childCategories) {
-    const query = childCategories.map((item) => ({
-      categoryName: item.categoryName,
-      parentCategoryId: categoryId,
-    }));
+  // if (childCategories) {
+  //   const query = childCategories.map((item) => ({
+  //     categoryName: item.categoryName,
+  //     parentCategoryId: categoryId,
+  //   }));
 
-    const isExist = await Category.find({ $or: query });
-    if (isExist.length) {
-      throw new AppError(
-        400,
-        " This category already exist",
-        "Update Category Error"
-      );
-    }
+  //   const isExist = await Category.find({ $or: query });
+  //   if (isExist.length) {
+  //     throw new AppError(
+  //       400,
+  //       " This category already exist",
+  //       "Update Category Error"
+  //     );
+  //   }
 
-    const childFields = ["categoryName", "imageUrl"];
-    const childData = [];
-    childCategories.forEach((item) => {
-      const itemData = {};
-      childFields.forEach((field) => {
-        if (item[field] !== undefined) {
-          itemData[field] = item[field];
-        }
-      });
-      itemData.parentCategoryId = category._id;
-      childData.push(itemData);
-    });
+  //   const childFields = ["categoryName", "imageUrl"];
+  //   const childData = [];
+  //   childCategories.forEach((item) => {
+  //     const itemData = {};
+  //     childFields.forEach((field) => {
+  //       if (item[field] !== undefined) {
+  //         itemData[field] = item[field];
+  //       }
+  //     });
+  //     itemData.parentCategoryId = category._id;
+  //     childData.push(itemData);
+  //   });
 
-    await Category.insertMany(childData);
-  }
+  //   await Category.insertMany(childData);
+  // }
 
-  childCategories = await Category.find({ parentCategoryId: categoryId });
+  const childCategories = await Category.find({ parentCategoryId: categoryId });
 
   return sendResponse(
     res,

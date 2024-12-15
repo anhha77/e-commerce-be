@@ -13,14 +13,7 @@ const { query, param } = require("express-validator");
  * @access Public
  */
 
-router.get(
-  "/",
-  authentication.loginRequired,
-  validators.validate([
-    query("categoryName").optional().exists().notEmpty().isString(),
-  ]),
-  categoryController.getCategories
-);
+router.get("/", authentication.loginRequired, categoryController.getCategories);
 
 /**
  * @route GET /category/:categoryId

@@ -3,66 +3,6 @@
   "data": {
     "categories": [
       {
-        "_id": "67112e3213c094039e3f478b",
-        "categoryName": "Topwear",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "670fd87d141855911236b2d0",
-          "categoryName": "Boys",
-          "isDeleted": false,
-          "__v": 0
-        }
-      },
-      {
-        "_id": "67112e85fa11f23b1657197f",
-        "categoryName": "Bottomwear",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "670fd87d141855911236b2d0",
-          "categoryName": "Boys",
-          "isDeleted": false,
-          "__v": 0
-        }
-      },
-      {
-        "_id": "67112f52fa11f23b16571981",
-        "categoryName": "Dress",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "670fd8f0141855911236b2d4",
-          "categoryName": "Girls",
-          "isDeleted": false,
-          "__v": 0
-        }
-      },
-      {
-        "_id": "6711302cfa11f23b16571983",
-        "categoryName": "Innerwear",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "670fd87d141855911236b2d0",
-          "categoryName": "Boys",
-          "isDeleted": false,
-          "__v": 0
-        }
-      },
-      {
-        "_id": "67113036fa11f23b16571985",
-        "categoryName": "Socks",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "670fd87d141855911236b2d0",
-          "categoryName": "Boys",
-          "isDeleted": false,
-          "__v": 0
-        }
-      },
-      {
         "_id": "67113042fa11f23b16571987",
         "categoryName": "Apparel Set",
         "isDeleted": false,
@@ -75,112 +15,16 @@
         }
       },
       {
-        "_id": "67113155fa11f23b1657198b",
-        "categoryName": "Tshirts",
-        "isDeleted": false,
-        "__v": 0,
+        "_id": "6713850e765771a55bef3d40",
+        "categoryName": "Apparel Set",
         "parentCategoryId": {
-          "_id": "67112e3213c094039e3f478b",
-          "categoryName": "Topwear",
+          "_id": "670fd8f0141855911236b2d4",
+          "categoryName": "Girls",
           "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "67113166fa11f23b1657198d",
-        "categoryName": "Rompers",
+          "__v": 0
+        },
         "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e3213c094039e3f478b",
-          "categoryName": "Topwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "671131d2fa11f23b16571991",
-        "categoryName": "Shirts",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e3213c094039e3f478b",
-          "categoryName": "Topwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "671131fbfa11f23b16571993",
-        "categoryName": "Jackets",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e3213c094039e3f478b",
-          "categoryName": "Topwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "67113204fa11f23b16571995",
-        "categoryName": "Kurtas",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e3213c094039e3f478b",
-          "categoryName": "Topwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "6711320cfa11f23b16571997",
-        "categoryName": "Sweatshirts",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e3213c094039e3f478b",
-          "categoryName": "Topwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
+        "__v": 0
       },
       {
         "_id": "6711321afa11f23b16571999",
@@ -201,80 +45,92 @@
         }
       },
       {
+        "_id": "67113405fa11f23b165719af",
+        "categoryName": "Booties",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "67113036fa11f23b16571985",
+          "categoryName": "Socks",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
+        "_id": "67147a7f765771a55bef3d7d",
+        "categoryName": "Booties",
+        "parentCategoryId": {
+          "_id": "67138502765771a55bef3d3c",
+          "categoryName": "Socks",
+          "parentCategoryId": {
+            "_id": "670fd8f0141855911236b2d4",
+            "categoryName": "Girls",
+            "isDeleted": false,
+            "__v": 0
+          },
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "67112e85fa11f23b1657197f",
+        "categoryName": "Bottomwear",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "670fd87d141855911236b2d0",
+          "categoryName": "Boys",
+          "isDeleted": false,
+          "__v": 0
+        }
+      },
+      {
+        "_id": "67138354765771a55bef3d30",
+        "categoryName": "Bottomwear",
+        "parentCategoryId": {
+          "_id": "670fd8f0141855911236b2d4",
+          "categoryName": "Girls",
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "670fd87d141855911236b2d0",
+        "categoryName": "Boys",
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "67147677765771a55bef3d5d",
+        "categoryName": "Capris",
+        "parentCategoryId": {
+          "_id": "67138354765771a55bef3d30",
+          "categoryName": "Bottomwear",
+          "parentCategoryId": {
+            "_id": "670fd8f0141855911236b2d4",
+            "categoryName": "Girls",
+            "isDeleted": false,
+            "__v": 0
+          },
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
         "_id": "671132bafa11f23b1657199b",
         "categoryName": "Capris",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e85fa11f23b1657197f",
-          "categoryName": "Bottomwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "671132c2fa11f23b1657199d",
-        "categoryName": "Shorts",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e85fa11f23b1657197f",
-          "categoryName": "Bottomwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "6711331afa11f23b165719a1",
-        "categoryName": "Jeans",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e85fa11f23b1657197f",
-          "categoryName": "Bottomwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "67113321fa11f23b165719a3",
-        "categoryName": "Leggings",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67112e85fa11f23b1657197f",
-          "categoryName": "Bottomwear",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "671133cdfa11f23b165719a7",
-        "categoryName": "Trousers",
         "isDeleted": false,
         "__v": 0,
         "parentCategoryId": {
@@ -309,58 +165,22 @@
         }
       },
       {
-        "_id": "671133eefa11f23b165719ab",
-        "categoryName": "Dresses",
-        "isDeleted": false,
-        "__v": 0,
+        "_id": "67147aa5765771a55bef3d81",
+        "categoryName": "Clothing Set",
         "parentCategoryId": {
-          "_id": "67112f52fa11f23b16571981",
-          "categoryName": "Dress",
-          "isDeleted": false,
-          "__v": 0,
+          "_id": "6713850e765771a55bef3d40",
+          "categoryName": "Apparel Set",
           "parentCategoryId": {
             "_id": "670fd8f0141855911236b2d4",
             "categoryName": "Girls",
             "isDeleted": false,
             "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "671133fdfa11f23b165719ad",
-        "categoryName": "Innerwear Vests",
-        "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "6711302cfa11f23b16571983",
-          "categoryName": "Innerwear",
+          },
           "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
-      },
-      {
-        "_id": "67113405fa11f23b165719af",
-        "categoryName": "Booties",
+          "__v": 0
+        },
         "isDeleted": false,
-        "__v": 0,
-        "parentCategoryId": {
-          "_id": "67113036fa11f23b16571985",
-          "categoryName": "Socks",
-          "isDeleted": false,
-          "__v": 0,
-          "parentCategoryId": {
-            "_id": "670fd87d141855911236b2d0",
-            "categoryName": "Boys",
-            "isDeleted": false,
-            "__v": 0
-          }
-        }
+        "__v": 0
       },
       {
         "_id": "6711342afa11f23b165719b1",
@@ -381,6 +201,156 @@
         }
       },
       {
+        "_id": "67112f52fa11f23b16571981",
+        "categoryName": "Dress",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "670fd8f0141855911236b2d4",
+          "categoryName": "Girls",
+          "isDeleted": false,
+          "__v": 0
+        }
+      },
+      {
+        "_id": "671133eefa11f23b165719ab",
+        "categoryName": "Dresses",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "67112f52fa11f23b16571981",
+          "categoryName": "Dress",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd8f0141855911236b2d4",
+            "categoryName": "Girls",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
+        "_id": "670fd8f0141855911236b2d4",
+        "categoryName": "Girls",
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "671384f1765771a55bef3d38",
+        "categoryName": "Innerwear",
+        "parentCategoryId": {
+          "_id": "670fd8f0141855911236b2d4",
+          "categoryName": "Girls",
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "6711302cfa11f23b16571983",
+        "categoryName": "Innerwear",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "670fd87d141855911236b2d0",
+          "categoryName": "Boys",
+          "isDeleted": false,
+          "__v": 0
+        }
+      },
+      {
+        "_id": "67147a5d765771a55bef3d79",
+        "categoryName": "Innerwear Vests",
+        "parentCategoryId": {
+          "_id": "671384f1765771a55bef3d38",
+          "categoryName": "Innerwear",
+          "parentCategoryId": {
+            "_id": "670fd8f0141855911236b2d4",
+            "categoryName": "Girls",
+            "isDeleted": false,
+            "__v": 0
+          },
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "671133fdfa11f23b165719ad",
+        "categoryName": "Innerwear Vests",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "6711302cfa11f23b16571983",
+          "categoryName": "Innerwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
+        "_id": "671131fbfa11f23b16571993",
+        "categoryName": "Jackets",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "67112e3213c094039e3f478b",
+          "categoryName": "Topwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
+        "_id": "6711331afa11f23b165719a1",
+        "categoryName": "Jeans",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "67112e85fa11f23b1657197f",
+          "categoryName": "Bottomwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
+        "_id": "6714769c765771a55bef3d69",
+        "categoryName": "Jeans",
+        "parentCategoryId": {
+          "_id": "67138354765771a55bef3d30",
+          "categoryName": "Bottomwear",
+          "parentCategoryId": {
+            "_id": "670fd8f0141855911236b2d4",
+            "categoryName": "Girls",
+            "isDeleted": false,
+            "__v": 0
+          },
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
         "_id": "67113433fa11f23b165719b3",
         "categoryName": "Kurta Sets",
         "isDeleted": false,
@@ -399,8 +369,8 @@
         }
       },
       {
-        "_id": "671134affa11f23b165719b5",
-        "categoryName": "Waistcoat",
+        "_id": "67113204fa11f23b16571995",
+        "categoryName": "Kurtas",
         "isDeleted": false,
         "__v": 0,
         "parentCategoryId": {
@@ -417,71 +387,29 @@
         }
       },
       {
-        "_id": "67138344765771a55bef3d2c",
-        "categoryName": "Topwear",
-        "parentCategoryId": {
-          "_id": "670fd8f0141855911236b2d4",
-          "categoryName": "Girls",
-          "isDeleted": false,
-          "__v": 0
-        },
+        "_id": "67113321fa11f23b165719a3",
+        "categoryName": "Leggings",
         "isDeleted": false,
-        "__v": 0
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "67112e85fa11f23b1657197f",
+          "categoryName": "Bottomwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
       },
       {
-        "_id": "67138354765771a55bef3d30",
-        "categoryName": "Bottomwear",
+        "_id": "671479b1765771a55bef3d6d",
+        "categoryName": "Leggings",
         "parentCategoryId": {
-          "_id": "670fd8f0141855911236b2d4",
-          "categoryName": "Girls",
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "671384f1765771a55bef3d38",
-        "categoryName": "Innerwear",
-        "parentCategoryId": {
-          "_id": "670fd8f0141855911236b2d4",
-          "categoryName": "Girls",
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "67138502765771a55bef3d3c",
-        "categoryName": "Socks",
-        "parentCategoryId": {
-          "_id": "670fd8f0141855911236b2d4",
-          "categoryName": "Girls",
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "6713850e765771a55bef3d40",
-        "categoryName": "Apparel Set",
-        "parentCategoryId": {
-          "_id": "670fd8f0141855911236b2d4",
-          "categoryName": "Girls",
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "6714727d765771a55bef3d49",
-        "categoryName": "Tops",
-        "parentCategoryId": {
-          "_id": "67138344765771a55bef3d2c",
-          "categoryName": "Topwear",
+          "_id": "67138354765771a55bef3d30",
+          "categoryName": "Bottomwear",
           "parentCategoryId": {
             "_id": "670fd8f0141855911236b2d4",
             "categoryName": "Girls",
@@ -495,8 +423,8 @@
         "__v": 0
       },
       {
-        "_id": "67147297765771a55bef3d4d",
-        "categoryName": "Tshirts",
+        "_id": "671472c0765771a55bef3d55",
+        "categoryName": "Lehenga Choli",
         "parentCategoryId": {
           "_id": "67138344765771a55bef3d2c",
           "categoryName": "Topwear",
@@ -531,11 +459,29 @@
         "__v": 0
       },
       {
-        "_id": "671472c0765771a55bef3d55",
-        "categoryName": "Lehenga Choli",
+        "_id": "67113166fa11f23b1657198d",
+        "categoryName": "Rompers",
+        "isDeleted": false,
+        "__v": 0,
         "parentCategoryId": {
-          "_id": "67138344765771a55bef3d2c",
+          "_id": "67112e3213c094039e3f478b",
           "categoryName": "Topwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
+        "_id": "671479c6765771a55bef3d71",
+        "categoryName": "Salwar",
+        "parentCategoryId": {
+          "_id": "67138354765771a55bef3d30",
+          "categoryName": "Bottomwear",
           "parentCategoryId": {
             "_id": "670fd8f0141855911236b2d4",
             "categoryName": "Girls",
@@ -547,6 +493,24 @@
         },
         "isDeleted": false,
         "__v": 0
+      },
+      {
+        "_id": "671131d2fa11f23b16571991",
+        "categoryName": "Shirts",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "67112e3213c094039e3f478b",
+          "categoryName": "Topwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
       },
       {
         "_id": "6714743b765771a55bef3d59",
@@ -554,24 +518,6 @@
         "parentCategoryId": {
           "_id": "67138344765771a55bef3d2c",
           "categoryName": "Topwear",
-          "parentCategoryId": {
-            "_id": "670fd8f0141855911236b2d4",
-            "categoryName": "Girls",
-            "isDeleted": false,
-            "__v": 0
-          },
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "67147677765771a55bef3d5d",
-        "categoryName": "Capris",
-        "parentCategoryId": {
-          "_id": "67138354765771a55bef3d30",
-          "categoryName": "Bottomwear",
           "parentCategoryId": {
             "_id": "670fd8f0141855911236b2d4",
             "categoryName": "Girls",
@@ -603,6 +549,24 @@
         "__v": 0
       },
       {
+        "_id": "671132c2fa11f23b1657199d",
+        "categoryName": "Shorts",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "67112e85fa11f23b1657197f",
+          "categoryName": "Bottomwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
         "_id": "67147694765771a55bef3d65",
         "categoryName": "Skirts",
         "parentCategoryId": {
@@ -621,11 +585,53 @@
         "__v": 0
       },
       {
-        "_id": "6714769c765771a55bef3d69",
-        "categoryName": "Jeans",
+        "_id": "67138502765771a55bef3d3c",
+        "categoryName": "Socks",
         "parentCategoryId": {
-          "_id": "67138354765771a55bef3d30",
-          "categoryName": "Bottomwear",
+          "_id": "670fd8f0141855911236b2d4",
+          "categoryName": "Girls",
+          "isDeleted": false,
+          "__v": 0
+        },
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "67113036fa11f23b16571985",
+        "categoryName": "Socks",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "670fd87d141855911236b2d0",
+          "categoryName": "Boys",
+          "isDeleted": false,
+          "__v": 0
+        }
+      },
+      {
+        "_id": "6711320cfa11f23b16571997",
+        "categoryName": "Sweatshirts",
+        "isDeleted": false,
+        "__v": 0,
+        "parentCategoryId": {
+          "_id": "67112e3213c094039e3f478b",
+          "categoryName": "Topwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
+        "_id": "6714727d765771a55bef3d49",
+        "categoryName": "Tops",
+        "parentCategoryId": {
+          "_id": "67138344765771a55bef3d2c",
+          "categoryName": "Topwear",
           "parentCategoryId": {
             "_id": "670fd8f0141855911236b2d4",
             "categoryName": "Girls",
@@ -639,17 +645,11 @@
         "__v": 0
       },
       {
-        "_id": "671479b1765771a55bef3d6d",
-        "categoryName": "Leggings",
+        "_id": "67138344765771a55bef3d2c",
+        "categoryName": "Topwear",
         "parentCategoryId": {
-          "_id": "67138354765771a55bef3d30",
-          "categoryName": "Bottomwear",
-          "parentCategoryId": {
-            "_id": "670fd8f0141855911236b2d4",
-            "categoryName": "Girls",
-            "isDeleted": false,
-            "__v": 0
-          },
+          "_id": "670fd8f0141855911236b2d4",
+          "categoryName": "Girls",
           "isDeleted": false,
           "__v": 0
         },
@@ -657,22 +657,16 @@
         "__v": 0
       },
       {
-        "_id": "671479c6765771a55bef3d71",
-        "categoryName": "Salwar",
+        "_id": "67112e3213c094039e3f478b",
+        "categoryName": "Topwear",
+        "isDeleted": false,
+        "__v": 0,
         "parentCategoryId": {
-          "_id": "67138354765771a55bef3d30",
-          "categoryName": "Bottomwear",
-          "parentCategoryId": {
-            "_id": "670fd8f0141855911236b2d4",
-            "categoryName": "Girls",
-            "isDeleted": false,
-            "__v": 0
-          },
+          "_id": "670fd87d141855911236b2d0",
+          "categoryName": "Boys",
           "isDeleted": false,
           "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
+        }
       },
       {
         "_id": "67147a3b765771a55bef3d75",
@@ -693,11 +687,29 @@
         "__v": 0
       },
       {
-        "_id": "67147a5d765771a55bef3d79",
-        "categoryName": "Innerwear Vests",
+        "_id": "671133cdfa11f23b165719a7",
+        "categoryName": "Trousers",
+        "isDeleted": false,
+        "__v": 0,
         "parentCategoryId": {
-          "_id": "671384f1765771a55bef3d38",
-          "categoryName": "Innerwear",
+          "_id": "67112e85fa11f23b1657197f",
+          "categoryName": "Bottomwear",
+          "isDeleted": false,
+          "__v": 0,
+          "parentCategoryId": {
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
+            "isDeleted": false,
+            "__v": 0
+          }
+        }
+      },
+      {
+        "_id": "67147297765771a55bef3d4d",
+        "categoryName": "Tshirts",
+        "parentCategoryId": {
+          "_id": "67138344765771a55bef3d2c",
+          "categoryName": "Topwear",
           "parentCategoryId": {
             "_id": "670fd8f0141855911236b2d4",
             "categoryName": "Girls",
@@ -711,52 +723,40 @@
         "__v": 0
       },
       {
-        "_id": "67147a7f765771a55bef3d7d",
-        "categoryName": "Booties",
+        "_id": "67113155fa11f23b1657198b",
+        "categoryName": "Tshirts",
+        "isDeleted": false,
+        "__v": 0,
         "parentCategoryId": {
-          "_id": "67138502765771a55bef3d3c",
-          "categoryName": "Socks",
+          "_id": "67112e3213c094039e3f478b",
+          "categoryName": "Topwear",
+          "isDeleted": false,
+          "__v": 0,
           "parentCategoryId": {
-            "_id": "670fd8f0141855911236b2d4",
-            "categoryName": "Girls",
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
             "isDeleted": false,
             "__v": 0
-          },
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
+          }
+        }
       },
       {
-        "_id": "67147aa5765771a55bef3d81",
-        "categoryName": "Clothing Set",
+        "_id": "671134affa11f23b165719b5",
+        "categoryName": "Waistcoat",
+        "isDeleted": false,
+        "__v": 0,
         "parentCategoryId": {
-          "_id": "6713850e765771a55bef3d40",
-          "categoryName": "Apparel Set",
+          "_id": "67112e3213c094039e3f478b",
+          "categoryName": "Topwear",
+          "isDeleted": false,
+          "__v": 0,
           "parentCategoryId": {
-            "_id": "670fd8f0141855911236b2d4",
-            "categoryName": "Girls",
+            "_id": "670fd87d141855911236b2d0",
+            "categoryName": "Boys",
             "isDeleted": false,
             "__v": 0
-          },
-          "isDeleted": false,
-          "__v": 0
-        },
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "670fd87d141855911236b2d0",
-        "categoryName": "Boys",
-        "isDeleted": false,
-        "__v": 0
-      },
-      {
-        "_id": "670fd8f0141855911236b2d4",
-        "categoryName": "Girls",
-        "isDeleted": false,
-        "__v": 0
+          }
+        }
       },
       {
         "_id": "67224da81f3ffc4de59cdd74",
@@ -767,7 +767,7 @@
           "isDeleted": false,
           "__v": 0
         },
-        "isDeleted": true,
+        "isDeleted": false,
         "__v": 0
       },
       {
@@ -782,10 +782,10 @@
             "isDeleted": false,
             "__v": 0
           },
-          "isDeleted": true,
+          "isDeleted": false,
           "__v": 0
         },
-        "isDeleted": true,
+        "isDeleted": false,
         "__v": 0
       },
       {
@@ -800,10 +800,10 @@
             "isDeleted": false,
             "__v": 0
           },
-          "isDeleted": true,
+          "isDeleted": false,
           "__v": 0
         },
-        "isDeleted": true,
+        "isDeleted": false,
         "__v": 0
       },
       {
@@ -818,98 +818,14 @@
             "isDeleted": false,
             "__v": 0
           },
-          "isDeleted": true,
+          "isDeleted": false,
           "__v": 0
         },
-        "isDeleted": true,
-        "__v": 0
-      },
-      {
-        "_id": "6722544e702471ed12cd5e77",
-        "categoryName": "b1",
-        "parentCategoryId": {
-          "_id": "672253a95bd589c6d41d7d15",
-          "categoryName": "b",
-          "parentCategoryId": {
-            "_id": "67224da81f3ffc4de59cdd78",
-            "categoryName": "a3",
-            "parentCategoryId": {
-              "_id": "67224da81f3ffc4de59cdd74",
-              "categoryName": "a",
-              "parentCategoryId": {
-                "_id": "670fd87d141855911236b2d0",
-                "categoryName": "Boys",
-                "isDeleted": false,
-                "__v": 0
-              },
-              "isDeleted": true,
-              "__v": 0
-            },
-            "isDeleted": true,
-            "__v": 0
-          },
-          "isDeleted": true,
-          "__v": 0
-        },
-        "isDeleted": true,
-        "__v": 0
-      },
-      {
-        "_id": "672253a95bd589c6d41d7d15",
-        "categoryName": "b",
-        "parentCategoryId": {
-          "_id": "67224da81f3ffc4de59cdd78",
-          "categoryName": "a3",
-          "parentCategoryId": {
-            "_id": "67224da81f3ffc4de59cdd74",
-            "categoryName": "a",
-            "parentCategoryId": {
-              "_id": "670fd87d141855911236b2d0",
-              "categoryName": "Boys",
-              "isDeleted": false,
-              "__v": 0
-            },
-            "isDeleted": true,
-            "__v": 0
-          },
-          "isDeleted": true,
-          "__v": 0
-        },
-        "isDeleted": true,
-        "__v": 0
-      },
-      {
-        "_id": "672396bb19b76bb23dd28762",
-        "categoryName": "b2",
-        "parentCategoryId": {
-          "_id": "672253a95bd589c6d41d7d15",
-          "categoryName": "b",
-          "parentCategoryId": {
-            "_id": "67224da81f3ffc4de59cdd78",
-            "categoryName": "a3",
-            "parentCategoryId": {
-              "_id": "67224da81f3ffc4de59cdd74",
-              "categoryName": "a",
-              "parentCategoryId": {
-                "_id": "670fd87d141855911236b2d0",
-                "categoryName": "Boys",
-                "isDeleted": false,
-                "__v": 0
-              },
-              "isDeleted": true,
-              "__v": 0
-            },
-            "isDeleted": true,
-            "__v": 0
-          },
-          "isDeleted": true,
-          "__v": 0
-        },
-        "isDeleted": true,
+        "isDeleted": false,
         "__v": 0
       }
     ],
-    "count": 54,
+    "count": 51,
     "totalPages": 1
   },
   "message": "Get categories sucessfully"
